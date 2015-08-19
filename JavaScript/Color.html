@@ -1,0 +1,104 @@
+<html>
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J.K.</title>
+        <script type="text/javascript">
+        function calculate(){
+        var x= parseInt(document.getElementById("x").value);
+        var f= document.getElementById("function");
+        var result=(3-x)/Math.sqrt(x-1);
+        f.innerHTML="f(x)=(3-x)/sqrt(x-1) <br/>"+result;
+        
+        
+    }
+    
+    var r=00;
+    var g=00;
+    var b=00;
+    
+    setInterval(function(){
+        //É NESCESSARIO ENTENDER COMO FUNCIONARIA A VARIAÇÃO DE CORES SOBRE O TEMPO.
+        var view=document.body;
+        view.style.backgroundColor="#"+r+g+b;
+        var rand=Math.random()*10;
+        /* Poderia usar a randomização, porem ela é..randomica :v ai as cores ficam estranhas. 
+        if(rand<3){
+            if(r>=255){r=0;}
+            r+=25;
+        }
+        if(rand<3 || rand>6){
+            if(g>=255){g=0;}
+            g+=25;
+        }
+        if(rand>6){
+            if(b>=255){b=0;}
+            b+=25;
+        }
+        */
+        
+        r+=25;
+        if(r>=255){
+            r=0;
+            g+=25;
+            if(g>=255){
+                g=0;
+                b+=25;
+                if(b>=255){b=0;}
+            }
+        }
+            
+        
+        
+    console.log("#"+r+g+b);
+    },100);
+        </script>
+        <style type="text/css">
+                
+        body {font-size:62.5%;}
+        
+        @media (max-width: 400px) {
+            p{font-size: 2em}
+            #body-container{
+                background-color: darkturquoise;
+                margin-left: 0%;
+                margin-right: 0%;
+                margin-top: 0%;
+            }
+        }
+        @media (min-width: 401px){
+            p{font-size: 3.5em}
+            .body-container{
+            background-color: darkturquoise;
+            margin-left: 5%;
+            margin-right: 5%;
+            margin-top: +5%;
+            padding: 30px;
+        }
+        }
+        @media (min-width: 800px) {
+            p{font-size: 5em}
+        }
+        
+        .center{
+            display: block;
+            position: relative;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            
+        }
+        
+        
+        img{max-width: 90%;width: 100%}
+        .img{}
+
+        </style>
+    </head>
+    <body class="center">
+        <div id="body-container">
+            <input type="number" id="x"></input><button onclick="calculate()">Calcular</button>
+        <p id="function">function =</p>
+        </div>
+    </body>
+</html> 
+
