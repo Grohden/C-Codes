@@ -11,50 +11,27 @@
         
         
     }
-    
-    var r=00;
-    var g=00;
-    var b=00;
-    
+     
+	 var opacity=0.1;
+	 var percorrido=false;
+	 
     setInterval(function(){
-        //É NESCESSARIO ENTENDER COMO FUNCIONARIA A VARIAÇÃO DE CORES SOBRE O TEMPO.
+		//Vou me basear na opacidade, pegando uma cor escolhida.
+		
         var view=document.body;
-        view.style.backgroundColor="#"+r+g+b;
-        var rand=Math.random()*10;
-        /* Poderia usar a randomização, porem ela é..randomica :v ai as cores ficam estranhas. 
-        if(rand<3){
-            if(r>=255){r=0;}
-            r+=25;
-        }
-        if(rand<3 || rand>6){
-            if(g>=255){g=0;}
-            g+=25;
-        }
-        if(rand>6){
-            if(b>=255){b=0;}
-            b+=25;
-        }
-        */
-        
-        r+=25;
-        if(r>=255){
-            r=0;
-            g+=25;
-            if(g>=255){
-                g=0;
-                b+=25;
-                if(b>=255){b=0;}
-            }
-        }
-            
-        
-        
-    console.log("#"+r+g+b);
-    },100);
+		view.style.opacity=opacity;
+		if(!percorrido){opacity+=0.01;} else{opacity-=0.01;}
+		
+		if(opacity>1 && percorrido==false){percorrido=!percorrido;}
+		if(opacity<0 && percorrido==true){percorrido=!percorrido;}
+     
+    console.log(opacity);
+    },10);
         </script>
         <style type="text/css">
-                
-        body {font-size:62.5%;}
+         
+		html{background-color:black;}	
+        body {font-size:62.5%;background-color:#ffffff;}
         
         @media (max-width: 400px) {
             p{font-size: 2em}
@@ -91,7 +68,6 @@
         
         img{max-width: 90%;width: 100%}
         .img{}
-
         </style>
     </head>
     <body class="center">
@@ -100,5 +76,4 @@
         <p id="function">function =</p>
         </div>
     </body>
-</html> 
-
+</html>
