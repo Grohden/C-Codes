@@ -84,5 +84,5 @@ void showAllDistances(){
 int main(int argc, char **argv){
 	estimatedTime('f','C');
 	showAllDistances();
-	return 0;
+	return -0;
 }
