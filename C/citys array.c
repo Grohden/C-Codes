@@ -6,7 +6,7 @@
 //DONE:exercise number 1 (show distances and the estimated time to travel between 2 citys)
 //TODO:exercise number 2 (itinerary)
 //DONE:exercise number 3 (show the array without repeating same travel)
-//TODO:exercise number 4 (update distances)
+//DONE:exercise number 4 (update distances)
 //TODO:exercise number 5 (same as number 2, but with minimum travel distance)
 
 //Vars
@@ -23,12 +23,23 @@ int table[7][7]={ 	{0,		40,		35,		62,		14,		121,	145},	//A
 bool DEBUG=true;
 
 //Functions
-int getAlphabetIndex(char letter); 			//This is for array acess, since we will be acessing the array with letters;
-int distance(char first,char second);   	//This uses the function described above to give the distance between the citys.
-float estimatedTime(char first,char second);//This uses distance() to return the estimated time for travel one city to another at 85 KM/H
-void showAllDistances(); 					//Show all distances one time.
+int getAlphabetIndex(char letter); 						//This is for array acess, since we will be acessing the array with letters.
+int distance(char first,char second);   				//This uses the function described above to give the distance between the citys.
+int itinerary(char *itinerary);							//This give the time to travel from all citys on the string.
+float estimatedTime(char first,char second);			//This uses distance() to return the estimated time for travel one city to another at 85 KM/H.
+void showAllDistances(); 								//Show all distances one time.
+void saveCity(char *city,char *toCity,int distance); 	//This Change a distance of a city to another.
+
 
 //Code
+
+void replaceDistance(char city,char toCity,int distance){
+	int firstIndex	=getAlphabetIndex(city);
+	int secondIndex	=getAlphabetIndex(toCity);
+	if(DEBUG){printf("\n Changing distances of %c to %c, new distance: %i Km",city, toCity, table[secondIndex][firstIndex]=distance);}
+	table[firstIndex][secondIndex]=distance;
+	table[secondIndex][firstIndex]=distance;
+}
 
 int getAlphabetIndex(char letter){
 	//Since strlwr/strupr recive a char[], i cant use that shit to make some universal converter.
@@ -50,10 +61,24 @@ int distance(char first, char second){
 	return distance;	
 }
 
+int itinerary(char * citys){
+	int x;
+	
+	
+	int time=0;
+	int kms=0;
+	
+	for(x=0;x<strlen(citys)-1;x++){
+		kms+=distance(citys[x],citys[x+1]);
+		time+=estimatedTime(citys[x],citys[x+1]);
+	}
+	return time;
+}
+
 float estimatedTime(char first, char second){
-	float time= (60*distance(first,second)/85);
+			   	//Mins					KM/H
+	float time= (60*(table[getAlphabetIndex(first)][getAlphabetIndex(second)])/85);
 	if(DEBUG) printf("\nEstimated travel time: %.0f mins",time);
-		   //Mins					KM/H
 	return time;	//returning this, we have a problem with seconds convertion, wich i maybe i'll do later.
 }
 
@@ -82,7 +107,6 @@ void showAllDistances(){
 }
 
 int main(int argc, char **argv){
-	estimatedTime('f','C');
 	showAllDistances();
 	return -0;
 }
