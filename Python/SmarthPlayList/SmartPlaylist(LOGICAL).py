@@ -7,7 +7,7 @@ import datetime
 
 #Aqui, são pegos os nomes e diretorio das musicas e dos diretorios (PEGARA SO OS ARQUIVOS, E OS NOMES DAS PASTAS JUNTO COM O CAMINHO)
 f = []
-for (dirpath, dirnames, filenames) in walk('E:\Musicas'): #se precisar altere, em um futuro pegara todas as musicas
+for (dirpath, dirnames, filenames) in walk(input("Informe a pasta de Musicas:")): #se precisar altere, em um futuro pegara todas as musicas
     f.extend(filenames)
     break
 
