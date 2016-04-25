@@ -41,18 +41,18 @@ void replaceDistance(char city,char toCity,int distance){
 	table[secondIndex][firstIndex]=distance;
 }
 
+
+//should return the index of the letter
 int getAlphabetIndex(char letter){
-	//Since strlwr/strupr recive a char[], i cant use that shit to make some universal converter.
+	//Since strlwr/strupr recive a char[], i cant use that s**t to make some universal converter.
 	
-	if (letter>64 && letter<91){ //if we have upper characters
+	if (letter>'A' && letter<'Z'){ //if we have upper characters
 		return letter-'A';
-	} else if (letter>96 && letter<123){  //if we have lower characters
+	} else if (letter>'a' && letter<'z'){  //if we have lower characters
 		return letter-'a';
 	} else {
-		return -99;
+		return -1;
 	}
-	
-
 }
 
 int distance(char first, char second){
