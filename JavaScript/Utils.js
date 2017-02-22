@@ -34,3 +34,25 @@ var objectOrArrayContainsValue = function (objOrArray, searchValue) {
     return false;
   }
 };
+
+
+/**
+ * Single execution for function, prevents it to be called if its in a loop
+ * @param {Function} fn function to be executed
+ * @param {Number} time time for timeout
+ * @returns Function call this to reset timeout*/
+function singleExecutionTimeout(fn, time){
+    fn = fn || $.noop;
+
+    var timeoutId;
+
+    function reScheduleTimeout(){
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(function(){
+            fn.apply(this,arguments);
+        },time);
+    }
+
+    reScheduleTimeout();
+    return reScheduleTimeout
+}
