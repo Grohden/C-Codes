@@ -56,3 +56,31 @@ function singleExecutionTimeout(fn, time){
     reScheduleTimeout();
     return reScheduleTimeout
 }
+
+/**
+ * Prevents a function to be called multiple times on a certain time
+ * @param {Function} fn function to be executed
+ * @param {Number} time time to be executed, if is called again and time hasnt passed the call is ignored
+ * @returns Function function to call on place of the old one */
+function intervalExecution(fn, time){
+    fn = fn || $.noop;
+
+    var timeoutId;
+    var called = true;
+
+    function scheduleIfNotCalled(){
+        if(called){
+            called = false;
+            timeoutId = setTimeout(function(){
+                fn.apply(this,arguments);
+                called = true;
+            },time);
+        } else {
+            console.log('ignoring calls');
+        }
+    }
+
+    scheduleIfNotCalled();
+
+    return scheduleIfNotCalled
+}
