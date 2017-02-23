@@ -52,8 +52,6 @@ function singleExecutionTimeout(fn, time){
             fn.apply(this,arguments);
         },time);
     }
-
-    reScheduleTimeout();
     return reScheduleTimeout
 }
 
@@ -76,11 +74,8 @@ function intervalExecution(fn, time){
                 called = true;
             },time);
         } else {
-            console.log('ignoring calls');
         }
     }
-
-    scheduleIfNotCalled();
 
     return scheduleIfNotCalled
 }
