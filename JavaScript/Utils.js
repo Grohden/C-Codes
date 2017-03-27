@@ -79,3 +79,36 @@ function intervalExecution(fn, time){
 
     return scheduleIfNotCalled
 }
+
+/**
+  @name getSafe
+  @description get the property from object with safety checks to avoid non-object properties access (nulls, undefined and others)
+  @param {Object} object object to search in
+  @param {String} str path to search
+  @return {Any} Returns undefined if not found, returns prop value if found.
+*/
+Object.prototype.getSafe = function(object, str){
+    if(typeof str !== 'string'){
+        console.error('cannot get undefined');
+        return undefined;
+    }
+
+	if(typeof object !== 'object'){
+		console.error('cannot acess property of non object');
+		return undefined;
+	}
+
+	propList = str.split('.');
+    var currentValue = object;
+    
+    var i = 0;
+    for(i = 0; i < propList.length; i++){
+		currentValue = currentValue[propList[i]];
+
+		if(typeof currentValue !== 'object' && i !== propList.length-1){
+			return undefined;		
+		}
+    }
+
+	return currentValue;
+}
