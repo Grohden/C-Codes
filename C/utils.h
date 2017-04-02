@@ -8,7 +8,7 @@
 //repeat, receives 1 int and repeat the the inside code same number passed as arg
 #define repeat(times) for(int i = 0; i < (times); i++)
 
-#define println(...) printf(__VA_ARGS__); printf("/n");
+#define println(...) printf(__VA_ARGS__); printf("\n");
 
 //Debug messages
 #define _USE_DEBUG 1

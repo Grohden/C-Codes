@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
-#define each(count,maxVal) for(count = 0;count < maxVal;count++)
+#include "../utils.h"
 
 #ifndef _STACK_DEBUG
-#define _STACK_DEBUG  1
+#define _STACK_DEBUG  0
 #endif // !_STACK_DEBUG
 
 //Mensagens de debug
@@ -25,6 +24,8 @@ typedef struct TypeStack {
 Stack * initStack(int maxStackSize);
 
 int getTopValue(Stack * stack);
+
+int getAndPopTopValue(Stack * stack);
 
 void pop(Stack * stack);
 

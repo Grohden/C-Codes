@@ -1,8 +1,5 @@
 #include "twoStack.h"
-
-#define repeat(x) for(int i = 0; i < x; i++)
-#define each(count, maxValue) for(count = 0; count < maxValue; count++)
-#define println(...) printf(__VA_ARGS__); printf("\n");
+#include "../utils.h"
 
 //Como é um programa de teste, não é feito para ser usado como lib
 //então não faz muito sentido colocar um header (e tambem ainda é algo pequeno)

@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "../utils.h"
 
 typedef struct StackType {
 	//Dados (array de uma dimensao com pilhas ficticias)
 	//Nao entendi o porque do ponteiro duplo void, entao mudei
 	//Se fosse ponteiro duplo, podia fazer um array com 2 elementos contendo duas pilhas
-	//Ja feitas nos exercicios anteriores de pilha
+	//ja feitas nos exercicios anteriores de pilha
 	int *data;
 	//Topo da primeira
 	int topOne;
