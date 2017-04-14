@@ -4,7 +4,7 @@
 #define _ROHDEN_UTILS 1
 
 //each, receives 2 ints and iterate the count from 0 to maxValue
-#define each(count, maxVal) for(count = 0; count < (maxVal); count++)
+#define each(count, maxVal) for(count = count; count < (maxVal); count++)
 //repeat, receives 1 int and repeat the the inside code same number passed as arg
 #define repeat(times) for(int i = 0; i < (times); i++)
 
@@ -18,5 +18,4 @@
 //Maybe i could use something else..
 #define debugMsg(...) NULL;
 #endif
-
 #endif // _ROHDEN_UTILS

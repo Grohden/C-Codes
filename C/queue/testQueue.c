@@ -32,28 +32,20 @@ void executeQueueTests(int size) {
 	emptyAndFullTest(q);
 
 	testCircular(q, size);
+
+
 }
 
 void testCircular(Queue *q, int size) {
-	int count = 0;
-	each(count, size) {
-		insertOnQueue(q, count);
-	}
+	fillQueue(q);
 
-	println("Tirando metade");
+	removeFromQueue(q);
 	printQueueInfos(q);
 
-	count = 0;
-	each(count, (size / 2)) {
-		removeFromQueue(q);
-	}
+	insertOnQueue(q, 666);
 	printQueueInfos(q);
 
-	println("Preenchendo");
-	count = 0;
-	each(count, size) {
-		insertOnQueue(q, 44);
-	}
+	removeFromQueue(q);
 	printQueueInfos(q);
 }
 
@@ -96,6 +88,6 @@ void fillQueue(Queue * q) {
 
 //TODO escrever os testes
 int main(int argc, char * argv[]) {
-	executeQueueTests(2);
+	executeQueueTests(15);
 	return 0;
 }

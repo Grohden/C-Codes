@@ -17,7 +17,8 @@ int getFromQueue(Queue * queue) {
 		println("Can't get value, queue is empty");
 		return NULL;
 	}
-	return queue->queueData[queue->last];
+	
+	return queue->queueData[queue->first+1];
 };
 
 void removeFromQueue(Queue * queue) {
