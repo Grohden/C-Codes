@@ -31,5 +31,5 @@ char * convertDecimalToBinary(int number) {
 
 
 char numberToCharNumber(int number) {
-	return 48 + number;
+	return '0' + number;
 }

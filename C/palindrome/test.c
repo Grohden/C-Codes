@@ -65,9 +65,18 @@ void testTrim() {
 
 };
 
+void getTestFromUser() {
+	char * a = malloc(sizeof(char) * 50);
+	printf("Digite uma frase: ");
+	gets(a);
+
+	println("A palavra/frase eh %s", isPalindrome(a, true) ? "palindrome" : "normal");
+}
+
 //TODO escrever os testes
 int main(int argc, char * argv[]) {
-	//testTrim();
+	//getTestFromUser();
+	testTrim();
 	testPhrase();
 	testPhraseTrim();
 	return 0;

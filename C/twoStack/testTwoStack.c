@@ -77,6 +77,7 @@ void testSecondStack(int stackSize) {
 	println("======== Teste 2 - Adicionado %d na 1 =========", stackSize + 1);
 	repeat(stackSize + 1) {
 		pushToFirst(d, i);
+		pushToSecond(d, i);
 		showGraphicInfoAbout(d);
 	}
 	system("PAUSE && CLS");
@@ -88,6 +89,7 @@ void testSecondStack(int stackSize) {
 	}
 	system("PAUSE && CLS");
 }
+
 
 void executeTests() {
 	int stackSizeForTest = 15;

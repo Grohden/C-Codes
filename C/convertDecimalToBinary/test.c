@@ -48,8 +48,18 @@ bool testConversion() {
 	return testOne && testTwo && testTree && testFour && testFive && testSix;
 };
 
+
+void getTestFromUser() {
+	int number = 0;
+	printf("\nDigite um numero: ");
+	scanf("%d" , &number);
+
+	printf("\nSeu numero em binario e %s \n", convertDecimalToBinary(number));
+}
+
 //TODO escrever os testes
 int main(int argc, char * argv[]) {
 	testConversion();
+	getTestFromUser();
 	return 0;
 }

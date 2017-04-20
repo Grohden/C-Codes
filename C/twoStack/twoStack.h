@@ -24,7 +24,6 @@ typedef struct StackType {
 void pushTo(DualStack * dualStack, int value, int stackPos);
 void popFrom(DualStack * dualStack, int stackPos);
 DualStack * initDualStack(int stackSize);
-
 bool isDualStackFull(DualStack * dualStack);
 
 //Primeira pilha
