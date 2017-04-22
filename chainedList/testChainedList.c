@@ -1,32 +1,52 @@
 #include "chainedList.h"
 #include "../utils.h"
-
+#include <math.h>
+#include <string.h>
 
 void executeTests(int size);
+void testNumbers(ChainedList *list, int size);
+void testStrings(ChainedList *list, int size);
 
 void executeQueueTests(int size) {
 	ChainedList * l = initChainedList();
+	testNumbers(l,size);
+	testStrings(l,size);
+}
 
-	int count = 0;
+void testStrings(ChainedList *list,int size) {
+	addToChainedList(list, (void *) "lal");
+	addToChainedList(list, (void *) "test");
+	addToChainedList(list, (void *) "teste");
+	addToChainedList(list, (void *) "aaaaaa");
+	addToChainedList(list, (void *) "wroking(?)");
+
+
+	println(
+		"Ultimo %s",
+		(char *) getFromChainedList(list, getChainedListLength(list) - 1)
+	);
+}
+
+void testNumbers(ChainedList *list, int size) {
+	
+	int count = 1;
+
 	do {
-		addToChainedList(l, count);
+		addIntegerToChainedList(list, count);
 	} while (count++ < size);
 
-	int sla = 30;
-	repeat(10) {
-		removeFromChainedList(l, sla);
-		sla++;
+	println(
+		"Ultimo %d",
+		*((int *) getFromChainedList(list, getChainedListLength(list) - 1))
+	);
+
+	repeat(size) {
+		removeFromChainedList(list, 0);
 	}
-
-	println("%d", getFromChainedList(l, getChainedListLength(l)-1));
-
-
-	println("%d", getChainedListLength(l));
-
 }
 
 //TODO escrever os testes
 int main(int argc, char * argv[]) {
-	executeQueueTests(150);
+	executeQueueTests(10);
 	return 0;
 }

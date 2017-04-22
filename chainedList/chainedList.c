@@ -1,19 +1,41 @@
 #include "chainedList.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include "../utils.h"
 
 ChainedList * initChainedList() {
 	ChainedList * c = calloc(1, sizeof(ChainedList));
 	c->next = NULL;
+
+
+
+	//O tamanho da lista encadeada vai estar no primeiro
+	c->data = calloc(1, sizeof(int));
+	int *size = (c->data);
+	*size = 0;
+
 	return c;
 }
 
-int getFromChainedList(ChainedList *chainedList, int index) {
+void* getFromChainedList(ChainedList *chainedList, int index) {
 	
+	if (index > getChainedListLength(chainedList) - 1) {
+		println("Nao e possivel pegar o item, index fora dos limites");
+		return NULL;
+	}
+
+	if (isChanedListEmpty(chainedList)) {
+		println("Nao e possivel pegar o item, lista vazia");
+		return NULL;
+	}
+
+
 	ChainedList * chainRef = chainedList->next;
 
 	int count = 0;
 
 	while(chainRef->next != 0 && count != index) {
-		println("%d", chainRef->data);
 		chainRef = chainRef->next;
 		count++;
 	}
@@ -26,7 +48,7 @@ int getFromChainedList(ChainedList *chainedList, int index) {
 	return NULL;
 }
 
-ChainedList * getLastRef(ChainedList *chainedList) {
+ChainedList* getLastRef(ChainedList *chainedList) {
 	//Deve procurar a referencia ao ultimo?
 	if (isChanedListEmpty(chainedList)) {
 		return chainedList;
@@ -44,11 +66,21 @@ ChainedList * getLastRef(ChainedList *chainedList) {
 	return nextRef;
 }
 
-void addToChainedList(ChainedList *chainedList, int value) {
-	ChainedList * next = initChainedList();
-	next->data = value;
+void addIntegerToChainedList(ChainedList *chainedList, int value) {
+	int * reference = calloc(1, sizeof(int));
+	*reference = value;
+
+	addToChainedList(chainedList, (void *) reference);
+}
+
+void addToChainedList(ChainedList *chainedList, void * data) {
+	ChainedList * next = calloc(1, sizeof(ChainedList));
+	next->data = data;
+	next->next = NULL;
 	
 	(getLastRef(chainedList))->next = next;
+
+	(*(int*)chainedList->data)++;
 }
 
 void removeFromChainedList(ChainedList *chainedList, int index) {
@@ -57,7 +89,7 @@ void removeFromChainedList(ChainedList *chainedList, int index) {
 		return;
 	}
 
-	if (index > getChainedListLength(chainedList)-1) {
+	if (index > getChainedListLength(chainedList) - 1) {
 		println("Index fora dos limites");
 		return;
 	}
@@ -77,6 +109,7 @@ void removeFromChainedList(ChainedList *chainedList, int index) {
 
 	free(actualRef);
 
+	(*(int*) chainedList->data)--;
 }
 
 int getChainedListLength(ChainedList *chainedList) {
@@ -84,16 +117,7 @@ int getChainedListLength(ChainedList *chainedList) {
 		return 0;
 	}
 
-	ChainedList * nextRef = chainedList->next;
-
-	int length = 1;
-	//Enquanto não achar o ultimo
-	while (nextRef->next != 0) {
-		nextRef = nextRef->next;
-		length++;
-	}
-
-	return length;
+	return (*(int*) chainedList->data);
 }
 
 bool isChanedListEmpty(ChainedList *chainedList) {
