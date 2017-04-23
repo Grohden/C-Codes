@@ -1,25 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "textualGUI.h"
+#include "specifics.h"
+#include "../utils.h"
+#include "../chainedList/chainedList.h"
 
-/*Creates a message box with one option (i know, it is useless since we have list(), may i change this to a pop-up with timer*/
+void drawList(ChainedList * options) {
+	//2 lines more for height margin
+	int boxHeight = getChainedListLength(options) + 2;
 
-/* This function draw a box and put in the middle of screen, and put the options on center */
-int drawList(char ** options, int numberOfOptions, int sizeOfOptions) {
-	int cols = 20;
-	int lines = 20;
-	int boxCols = cols / 2;
-	int boxLines = lines / 2;
 	int index = 0;
-	system("cls");
+	int longestWord = 0;
+	int wordLen = 0;
 
-	drawBox(boxCols, boxLines, boxCols, boxLines);
-
-	char halfOpts = (numberOfOptions) / 2;
-	char itemsSize = (sizeOfOptions);
-
-	each(index, numberOfOptions) {
-		mgotoxy(boxCols*1.5+2, boxLines*1.5 - 1);
-		printf(options[index]);
+	//Get the longest word
+	each(index, getChainedListLength(options)) {
+		wordLen = strlen((char *) getFromChainedList(options, index));
+		if (longestWord < wordLen) {
+			longestWord = wordLen;
+		}
 	}
+
+	int boxInitialX = ((getScreenWidth() / 2) - ((longestWord) / 2));
+	int boxInitialY = ((getScreenHeight() / 2) - (boxHeight / 2));
+	int actualLine = boxInitialY + 1;
+
+	system("cls");
+	drawBox(
+		longestWord+4,
+		boxHeight,
+		boxInitialX-2,
+		boxInitialY
+	);
+
+
+	//Draw the box
+	index = 0;
+	each(index, getChainedListLength(options)) {
+		mgotoxy(boxInitialX, actualLine);
+		printf("%s",(char *) getFromChainedList(options, index));
+		actualLine++;
+	}
+
+	mgotoxy(0, getScreenHeight() - 2);
 }
 
 /*
@@ -74,7 +98,7 @@ void drawBox(int width, int height, int x, int y) {
 	actualY++;
 
 	printf("%c", 201);
-	repeat((width * 2) - 2) {
+	repeat((width) - 2) {
 		printf("%c", 205);
 	}
 	println("%c", 187);
@@ -85,7 +109,7 @@ void drawBox(int width, int height, int x, int y) {
 		actualY++;
 
 		printf("%c", 186);
-		repeat((width * 2) - 2) {
+		repeat((width) - 2) {
 			printf("%c", ' ');
 		}
 		println("%c", 186);
@@ -95,7 +119,7 @@ void drawBox(int width, int height, int x, int y) {
 	mgotoxy(x, y + actualY);
 	printf("%c", 200);
 	
-	repeat((width * 2) - 2) {
+	repeat((width) - 2) {
 		printf("%c", 205);
 	}
 	println("%c", 188);

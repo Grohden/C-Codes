@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include "../utils.h"
-#include "specifics.h"
+#include "../chainedList/chainedList.h"
 
 /* This function draw a box and put in the middle of screen, and put the options on center
 int list(char * options, int numberOfOptions, int sizeOfOptions);
@@ -13,4 +11,4 @@ int selectableList(char * options[], int numberOfOptions, int sizeOfOptions);
 
 void drawBox(int width, int height, int x, int y);
 
-int drawList(char **options, int numberOfOptions, int sizeOfOptions);
+void drawList(ChainedList * options);

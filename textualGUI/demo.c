@@ -1,19 +1,28 @@
 #include "textualGUI.h"
 #include <malloc.h>
+#include "specifics.h"
+#include "../chainedList/chainedList.h"
 
-int main(int *argv, int argc) {
-
+int main(int **argv, int argc) {
+	setScreenSize(60, 40);
 	//char * str = calloc(10 * 10, sizeof(char));
 	//drawBox(10, 10, 20, 10);
+	
 
-	char *c = "Batata";
-	char *e = "Batata";
+	char *one = "Batatassss";
 	
-	char ** b = calloc(2, sizeof(char));
-	b[0] = c;
-	b[1] = e;
+	ChainedList * c = initChainedList();
+
+	addToChainedList(c, (void *) one);
+	addToChainedList(c, (void *) one);
+	addToChainedList(c, (void *) one);
+	addToChainedList(c, (void *) one);
+	addToChainedList(c, (void *) one);
+	addToChainedList(c, (void *) one);
+	addToChainedList(c, (void *) one);
+	addToChainedList(c, (void *) one);
 	
-	drawList(b, 2, 7);
+	drawList(c);
 
 	return 0;
 }

@@ -1,4 +1,10 @@
 #include "specifics.h"
+#include <windows.h>
+#include <stdio.h>
+
+int _screenHeight_ = 0;
+int _screenWidth_ = 0;
+
 
 void mgotoxy(int x, int y) {
 	COORD p = { x,y };
@@ -17,7 +23,18 @@ void setScreenSize(int cols, int lines) {
 	char command[1];
 	sprintf(command, format, cols, lines);
 	system(command);
+
+	_screenHeight_ = lines;
+	_screenWidth_ = cols;
 };
+
+int getScreenHeight() {
+	return _screenHeight_;
+}
+
+int getScreenWidth() {
+	return _screenWidth_;
+}
 
 void hidecursor() {
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
