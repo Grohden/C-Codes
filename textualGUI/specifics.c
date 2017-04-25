@@ -4,6 +4,7 @@
 
 int _screenHeight_ = 0;
 int _screenWidth_ = 0;
+char *screenSizeCommand;
 
 
 void mgotoxy(int x, int y) {
@@ -24,9 +25,18 @@ void setScreenSize(int cols, int lines) {
 	sprintf(command, format, cols, lines);
 	system(command);
 
+	screenSizeCommand = &command;
+
 	_screenHeight_ = lines;
 	_screenWidth_ = cols;
 };
+
+void ensureScreenSize() {
+	if (screenSizeCommand) {
+		system(screenSizeCommand);
+	}
+}
+
 
 int getScreenHeight() {
 	return _screenHeight_;

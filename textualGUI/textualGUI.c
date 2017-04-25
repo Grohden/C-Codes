@@ -1,15 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include "textualGUI.h"
 #include "specifics.h"
 #include "../utils.h"
 #include "../chainedList/chainedList.h"
 
-void drawList(ChainedList * options) {
-	//2 lines more for height margin
-	int boxHeight = getChainedListLength(options) + 2;
+#define TOP_PADDING 1
+#define BOTTOM_PADDING 1
+#define LEFT_PADDING 2
+#define RIGHT_PADDING 2
 
+int drawList(ChainedList * options) {
+	ensureScreenSize();
+
+	//2 lines more for height margin
+	int boxHeight = getChainedListLength(options) + TOP_PADDING + BOTTOM_PADDING;
 	int index = 0;
 	int longestWord = 0;
 	int wordLen = 0;
@@ -24,13 +31,13 @@ void drawList(ChainedList * options) {
 
 	int boxInitialX = ((getScreenWidth() / 2) - ((longestWord) / 2));
 	int boxInitialY = ((getScreenHeight() / 2) - (boxHeight / 2));
-	int actualLine = boxInitialY + 1;
+	int actualLine = boxInitialY + TOP_PADDING;
 
 	system("cls");
 	drawBox(
-		longestWord+4,
+		longestWord + LEFT_PADDING + RIGHT_PADDING,
 		boxHeight,
-		boxInitialX-2,
+		boxInitialX - LEFT_PADDING,
 		boxInitialY
 	);
 
@@ -39,28 +46,34 @@ void drawList(ChainedList * options) {
 	index = 0;
 	each(index, getChainedListLength(options)) {
 		mgotoxy(boxInitialX, actualLine);
-		printf("%s",(char *) getFromChainedList(options, index));
+		printf((char *) getFromChainedList(options, index));
 		actualLine++;
 	}
 
+	//Just for system pause
 	mgotoxy(0, getScreenHeight() - 2);
+
+	return longestWord;
 }
 
-/*
-int selectableList(char * options[], int numberOfOptions, int sizeOfOptions) {
+
+int drawSelectableList(ChainedList *options, bool circularSelection) {
 	if (kbhit()) {
 		getch(); //prevent acidental enters
 	}
-	list(options, numberOfOptions, sizeOfOptions);
-	int boxCols = SCREEN_WIDTH / 2;
-	int boxLines = SCREEN_HEIGHT / 2;
-	char halfOpts = (numberOfOptions) / 2;
-	char itemsSize = (sizeOfOptions);
-	int selectedOption = -halfOpts;
+
+	setTextColor(BLACK_WHITE);
+
+	int longestWord = drawList(options);
+	int boxHeight = getChainedListLength(options);
+	int initialX = ((getScreenWidth() / 2) - ((longestWord) / 2));
+	int initialY = ((getScreenHeight() / 2) - (boxHeight / 2));
+	int selectedOption = 0;
+
 	//Select first item
 	setTextColor(WHITE_BLACK);
-	mgotoxy(boxCols - (itemsSize / 2), boxLines + selectedOption);
-	printf(options[selectedOption + halfOpts]);
+	mgotoxy(initialX, initialY);
+	printf((char *) getFromChainedList(options, selectedOption));
 
 	char key;
 	hidecursor();
@@ -69,28 +82,40 @@ int selectableList(char * options[], int numberOfOptions, int sizeOfOptions) {
 		if (key == -32) { //if its a arrow key
 			key = getch();
 			setTextColor(BLACK_WHITE);
-			mgotoxy(boxCols - (itemsSize / 2), boxLines + selectedOption);
-			printf(options[selectedOption + halfOpts]);
+			mgotoxy(initialX, initialY + selectedOption);
+			printf((char *) getFromChainedList(options, selectedOption));
 
 			switch (key) {
-			case UP:
-				selectedOption = selectedOption <= -halfOpts ? halfOpts : selectedOption - 1; //Infinite scroll
-				break;
-			case DOWN:
-				selectedOption = selectedOption >= halfOpts ? -halfOpts : selectedOption + 1; //Infinite scroll
-				break;
+				case UP:
+					if (selectedOption < 1) {
+						selectedOption = circularSelection ? boxHeight-1 : 0;
+					} else {
+						selectedOption--;
+					}
+
+					break;
+				case DOWN:
+					if (selectedOption >= boxHeight-1) {
+						selectedOption = circularSelection ? 0 : selectedOption;
+					} else {
+						selectedOption++;
+					}
+
+					break;
 			}
 			setTextColor(WHITE_BLACK);
-			mgotoxy(boxCols - (itemsSize / 2), boxLines + selectedOption);
-			printf("%s", options[selectedOption + halfOpts]);
+			mgotoxy(initialX, initialY + selectedOption);
+			printf((char *) getFromChainedList(options, selectedOption));
 		}
 	} while (key != 13); //Enter key.
-	return selectedOption + halfOpts;
+
+	setTextColor(BLACK_WHITE);
+	mgotoxy(0, getScreenHeight() - 2);
+
+	return selectedOption;
 }
-*/
 
 void drawBox(int width, int height, int x, int y) {
-	int index = 0;
 	int actualY = 0;
 
 	//Top

@@ -16,4 +16,6 @@ void setTextColor(int k);
 
 void setScreenSize(int cols, int lines);
 
+void ensureScreenSize();
+
 void hidecursor();
