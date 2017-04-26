@@ -1,7 +1,8 @@
-#include "hasValidParentesis.h"
-#include "../utils.h"
 #include <stdbool.h>
+#include <stdlib.h>
 #include <string.h>
+#include "../../utils.h"
+#include "hasValidParentesis.h"
 
 void executeStackTests() {
 	
@@ -20,7 +21,7 @@ void executeStackTests() {
 
 
 void getTestFromUser() {
-	char * str = malloc(sizeof(char) * 50);
+	char *str = (char *) malloc(sizeof(char) * 50);
 	printf("\nDigite uma expressao:");
 	gets(str);
 

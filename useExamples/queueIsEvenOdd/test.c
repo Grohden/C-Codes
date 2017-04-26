@@ -1,7 +1,7 @@
-#include "countOddOrEven.h"
-#include "../utils.h"
 #include <time.h>
 #include <math.h>
+#include "countOddOrEven.h"
+#include "../../utils.h"
 
 
 void fillQueue(Queue * q) {

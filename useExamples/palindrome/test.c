@@ -1,6 +1,7 @@
-#include "palindrome.h"
-#include "../utils.h"
 #include <string.h>
+#include <stdlib.h>
+#include "../../utils.h"
+#include "palindrome.h"
 
 bool testPhrase() {
 	bool testOne = isPalindrome("ovo", false);

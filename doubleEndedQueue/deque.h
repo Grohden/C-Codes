@@ -6,8 +6,8 @@
 typedef struct TypeDeque {
 	int left;
 	int right;
-	int maxLength;
-	int length;
+	int maxLength; //Tamanho maximo
+	int length; // Tamanho atual
 	int * data;
 } Deque;
 

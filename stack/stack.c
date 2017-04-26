@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include "../utils.h"
 #include "stack.h"
 
 Stack * initStack(int maxStackSize){

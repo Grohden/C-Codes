@@ -1,6 +1,5 @@
-#include "../utils.h"
-#include "../stack/stack.h"
-#include <string.h>
+#include <stdbool.h>
+#include "../../stack/stack.h"
 
 //Diz se a frase é palindrome
 bool isPalindrome(char * phrase, bool trim);

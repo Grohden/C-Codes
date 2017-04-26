@@ -1,6 +1,6 @@
-#include "inverter.h"
 #include <time.h>
 #include <stdlib.h>
+#include "inverter.h"
 
 void fillQueue(Queue * q);
 void executeTests(int size);

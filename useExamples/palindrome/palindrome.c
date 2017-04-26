@@ -1,3 +1,8 @@
+#include <string.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include "../../utils.h"
+#include "../../stack/stack.h"
 #include "palindrome.h"
 
 //Diz se a frase é palindrome

@@ -6,9 +6,12 @@ int _screenHeight_ = 0;
 int _screenWidth_ = 0;
 char *screenSizeCommand;
 
+void clearScreen() {
+	system("cls");
+};
 
-void mgotoxy(int x, int y) {
-	COORD p = { x,y };
+void putCursorAt(int horizontalPosition, int verticalPosition) {
+	COORD p = { horizontalPosition, verticalPosition };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), p);
 };
 
@@ -20,17 +23,18 @@ void setTextColor(int k) {
 
 void setScreenSize(int cols, int lines) {
 	//Command string format
-	char format[] = "mode con:cols=%d lines=%d";
-	char command[1];
+	char *format = "mode con:cols=%d lines=%d";
+	char *command = calloc(strlen(format), sizeof(char));
 	sprintf(command, format, cols, lines);
 	system(command);
 
-	screenSizeCommand = &command;
+	screenSizeCommand = command;
 
 	_screenHeight_ = lines;
 	_screenWidth_ = cols;
 };
 
+//Make sure the screen size is the actual size
 void ensureScreenSize() {
 	if (screenSizeCommand) {
 		system(screenSizeCommand);

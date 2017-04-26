@@ -3,6 +3,9 @@
 #include <stdbool.h>
 #include "../utils.h"
 
+#ifndef _QUEUE_
+#define _QUEUE_
+
 typedef struct TypeQueue {
 	//Index do ultimo a entrar (ultimo da fila)
 	int last;
@@ -24,3 +27,4 @@ void insertOnQueue(Queue * queue, int value);
 
 bool isQueueEmpty(Queue * queue);
 bool isQueueFull(Queue * queue);
+#endif //!_QUEUE_

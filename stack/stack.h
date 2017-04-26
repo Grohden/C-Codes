@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <stdbool.h>
-#include "../utils.h"
 
 #ifndef _STACK_DEBUG
 #define _STACK_DEBUG  0
@@ -15,6 +12,8 @@
 #endif // 0
 
 
+#ifndef _STACK_
+#define _STACK_
 typedef struct TypeStack {
 	int top;
 	int * stackList;
@@ -34,3 +33,5 @@ void push(Stack * stack, int value);
 bool isStackEmpty(Stack * stack);
 
 bool isStackFull(Stack * stack);
+
+#endif //!_STACK_
