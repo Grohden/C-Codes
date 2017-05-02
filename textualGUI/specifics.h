@@ -1,3 +1,8 @@
+
+
+#ifndef _SO_SPECIFICS_
+#define _SO_SPECIFICS_
+
 //These ones are specific for windows
 #define BLACK_WHITE 07
 #define WHITE_BLACK 240
@@ -22,3 +27,4 @@ void setScreenSize(int cols, int lines);
 void ensureScreenSize();
 
 void hidecursor();
+#endif // !_SO_SPECIFICS_

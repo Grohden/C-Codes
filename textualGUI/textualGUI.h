@@ -3,6 +3,8 @@
 
 void drawBox(int width, int height, int x, int y);
 
-int drawList(ChainedList * options);
+int getLonggestWordLen(ChainedList * chainedList);
+
+void drawList(ChainedList * options);
 
 int drawSelectableList(ChainedList *options, bool circularSelection);

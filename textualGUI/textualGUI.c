@@ -15,22 +15,12 @@
 #define LEFT_PADDING 2
 #define RIGHT_PADDING 2
 
-int drawList(ChainedList * options) {
+void drawList(ChainedList * options) {
 	//Ensure that the screen size is right
 	ensureScreenSize();
 
 	int boxHeight = getChainedListLength(options) + TOP_PADDING + BOTTOM_PADDING;
-	int index = 0;
-	int longestWord = 0;
-	int wordLen = 0;
-
-	//Get the longest word
-	each(index, getChainedListLength(options)) {
-		wordLen = strlen((char *) getFromChainedList(options, index));
-		if (longestWord < wordLen) {
-			longestWord = wordLen;
-		}
-	}
+	int longestWord = getLonggestWordLen(options);
 
 	//Defines the X & Y initial axys to draw the list
 	int boxInitialX = ((getScreenWidth() / 2) - ((longestWord) / 2));
@@ -52,7 +42,7 @@ int drawList(ChainedList * options) {
 
 
 	//Draw the options
-	index = 0;
+	int index = 0;
 	each(index, getChainedListLength(options)) {
 		//Put at the right Y axys
 		putCursorAt(boxInitialX, actualLine);
@@ -64,11 +54,26 @@ int drawList(ChainedList * options) {
 
 	//put cursor at bottom, just for system pause
 	putCursorAt(0, getScreenHeight() - 2);
-
-	//Need to review this, nonsense return the longest word length
-	return longestWord;
 }
 
+int getLonggestWordLen(ChainedList * chainedList) {
+	if (isChanedListEmpty(chainedList)) {
+		return 0;
+	}
+
+	int index = 0;
+	int longestWord = 0;
+	int wordLen = 0;
+
+	//Get the longest word
+	each(index, getChainedListLength(chainedList)) {
+		wordLen = strlen((char *) getFromChainedList(chainedList, index));
+		if (longestWord < wordLen) {
+			longestWord = wordLen;
+		}
+	}
+	return longestWord;
+}
 
 int drawSelectableList(ChainedList *options, bool circularSelection) {
 	if (kbhit()) {
@@ -77,8 +82,9 @@ int drawSelectableList(ChainedList *options, bool circularSelection) {
 
 	setTextColor(BLACK_WHITE);
 
-	//Draw the options list, wich returns the longest word len
-	int longestWord = drawList(options);
+	//Draw the options list
+	drawList(options);
+	int longestWord = getLonggestWordLen(options);
 
 	int boxHeight = getChainedListLength(options);
 	int initialX = ((getScreenWidth() / 2) - ((longestWord) / 2));
