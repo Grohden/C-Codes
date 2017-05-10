@@ -8,6 +8,15 @@ void executeTests(int size);
 void testNumbers(ChainedList *list, int size);
 void testStrings(ChainedList *list, int size);
 
+
+void printChainData(ChainedList * head) {
+	println("========");
+	println("Next: %p", head->next);
+	println("Data: %p", head->data);
+	println("Lenght: %d", getChainLength(head));
+	println("========");
+}
+
 void executeQueueTests(int size) {
 	ChainedList * l = initChain();
 	//testNumbers(l,size);
@@ -19,23 +28,28 @@ void testStrings(ChainedList *list,int size) {
 
 	addToChain(list, (void *) "lal");
 
-    println("aa");
-
-	removeFromChain(list, 0);
-
-
-    println("aa");
+    removeFromChain(list, 0);
 
 	addToChain(list, (void *) "test");
 	addToChain(list, (void *) "teste");
 	addToChain(list, (void *) "aaaaaa");
 	addToChain(list, (void *) "wroking(?)");
 
+    printChainData(list);
 
-	println(
-		"Ultimo %s",
-		(char *) getChainDataAt(list, getChainLength(list) - 1)
-	);
+
+	repeat(getChainLength(list)){
+	    println("%s", (char *) getChainDataAt(list,i));
+	}
+
+    int len = getChainLength(list);
+
+	repeat(len+1){
+	    printChainData(list);
+        removeFromChain(list, 0);
+    }
+
+    printChainData(list);
 }
 
 void testNumbers(ChainedList *list, int size) {
