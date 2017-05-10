@@ -8,7 +8,6 @@
 #include "../utils.h"
 #include "../chainedList/chainedList.h"
 
-
 //Paddings for boxes
 #define TOP_PADDING 1
 #define BOTTOM_PADDING 1
@@ -19,8 +18,8 @@ void drawList(ChainedList * options) {
 	//Ensure that the screen size is right
 	ensureScreenSize();
 
-	int boxHeight = getChainedListLength(options) + TOP_PADDING + BOTTOM_PADDING;
-	int longestWord = getLonggestWordLen(options);
+	int boxHeight = getChainLength(options) + TOP_PADDING + BOTTOM_PADDING;
+	int longestWord = getLongestWordLen(options);
 
 	//Defines the X & Y initial axys to draw the list
 	int boxInitialX = ((getScreenWidth() / 2) - ((longestWord) / 2));
@@ -43,11 +42,11 @@ void drawList(ChainedList * options) {
 
 	//Draw the options
 	int index = 0;
-	each(index, getChainedListLength(options)) {
+	each(index, getChainLength(options)) {
 		//Put at the right Y axys
 		putCursorAt(boxInitialX, actualLine);
 		//Print the option
-		printf((char *) getFromChainedList(options, index));
+		printf((char *) getChainDataAt(options, index));
 		//go to next line
 		actualLine++;
 	}
@@ -56,8 +55,8 @@ void drawList(ChainedList * options) {
 	putCursorAt(0, getScreenHeight() - 2);
 }
 
-int getLonggestWordLen(ChainedList * chainedList) {
-	if (isChanedListEmpty(chainedList)) {
+int getLongestWordLen(ChainedList * chainedList) {
+	if (isChainEmpty(chainedList)) {
 		return 0;
 	}
 
@@ -66,8 +65,8 @@ int getLonggestWordLen(ChainedList * chainedList) {
 	int wordLen = 0;
 
 	//Get the longest word
-	each(index, getChainedListLength(chainedList)) {
-		wordLen = strlen((char *) getFromChainedList(chainedList, index));
+	each(index, getChainLength(chainedList)) {
+		wordLen = strlen((char *) getChainDataAt(chainedList, index));
 		if (longestWord < wordLen) {
 			longestWord = wordLen;
 		}
@@ -84,9 +83,9 @@ int drawSelectableList(ChainedList *options, bool circularSelection) {
 
 	//Draw the options list
 	drawList(options);
-	int longestWord = getLonggestWordLen(options);
+	int longestWord = getLongestWordLen(options);
 
-	int boxHeight = getChainedListLength(options);
+	int boxHeight = getChainLength(options);
 	int initialX = ((getScreenWidth() / 2) - ((longestWord) / 2));
 	int initialY = ((getScreenHeight() / 2) - (boxHeight / 2));
 	
@@ -96,7 +95,7 @@ int drawSelectableList(ChainedList *options, bool circularSelection) {
 	//print the first item selected
 	setTextColor(WHITE_BLACK);
 	putCursorAt(initialX, initialY);
-	printf((char *) getFromChainedList(options, selectedOption));
+	printf((char *) getChainDataAt(options, selectedOption));
 
 	char key;
 	hidecursor();
@@ -108,7 +107,7 @@ int drawSelectableList(ChainedList *options, bool circularSelection) {
 			//'Erase' the last selection
 			setTextColor(BLACK_WHITE);
 			putCursorAt(initialX, initialY + selectedOption);
-			printf((char *) getFromChainedList(options, selectedOption));
+			printf((char *) getChainDataAt(options, selectedOption));
 
 			//Process the arrow key
 			switch (key) {
@@ -132,7 +131,7 @@ int drawSelectableList(ChainedList *options, bool circularSelection) {
 			//Print the selected
 			setTextColor(WHITE_BLACK);
 			putCursorAt(initialX, initialY + selectedOption);
-			printf((char *) getFromChainedList(options, selectedOption));
+			printf((char *) getChainDataAt(options, selectedOption));
 		}
 	} while (key != 13); //Enter key.
 

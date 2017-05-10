@@ -12,12 +12,12 @@ void testSelectableList() {
 	setScreenSize(SCREEN_RATIO * 2, 40);
 
 	//We init the chained list
-	ChainedList * c = initChainedList();
+	ChainedList * c = initChain();
 
 	//Add the items
-	addToChainedList(c, (void *) "Hello There!");
-	addToChainedList(c, (void *) "Im a simple selectable list");
-	addToChainedList(c, (void *) "Press enter here to add more options");
+	addToChain(c, (void *) "Hello There!");
+	addToChain(c, (void *) "Im a simple selectable list");
+	addToChain(c, (void *) "Press enter here to add more options");
 
 	//Draw the seletable list and wait for the response
 	int selected = drawSelectableList(c, true);
@@ -39,17 +39,17 @@ void testSelectableList() {
 			//Remove \n
 			userInput[strlen(userInput) - 1] = '\0';
 
-			addToChainedList(c, userInput);
+			addToChain(c, userInput);
 			selected = drawSelectableList(c, true);
 
-			if(getChainedListLength(c) == getScreenHeight()) {
+			if(getChainLength(c) == getScreenHeight()) {
 				setScreenSize(getScreenWidth(), getScreenHeight() + 2);
 			}
 		}
 
 	}
 
-	println("Selected is '%s', wich is at position %d",(char *) getFromChainedList(c,selected), selected);
+	println("Selected is '%s', wich is at position %d",(char *) getChainDataAt(c, selected), selected);
 }
 
 
@@ -59,14 +59,14 @@ void testDrawList() {
 	setScreenSize(SCREEN_RATIO*2, SCREEN_RATIO);
 
 	//We init a chained list
-	ChainedList * c = initChainedList();
+	ChainedList * c = initChain();
 
 	//Add the items
-	addToChainedList(c, (void *) "A simple test");
-	addToChainedList(c, (void *) "For a simple box");
-	addToChainedList(c, (void *) "With some items");
-	addToChainedList(c, (void *) "or maybe");
-	addToChainedList(c, (void *) "Is a complex box?");
+	addToChain(c, (void *) "A simple test");
+	addToChain(c, (void *) "For a simple box");
+	addToChain(c, (void *) "With some items");
+	addToChain(c, (void *) "or maybe");
+	addToChain(c, (void *) "Is a complex box?");
 	//Then we draw a LIST
 	drawList(c);
 }

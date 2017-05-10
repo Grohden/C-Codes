@@ -3,7 +3,7 @@
 
 void drawBox(int width, int height, int x, int y);
 
-int getLonggestWordLen(ChainedList * chainedList);
+int getLongestWordLen(ChainedList * chainedList);
 
 void drawList(ChainedList * options);
 

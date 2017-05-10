@@ -137,7 +137,6 @@ void removeFromChain(ChainedList *chainHead, int index) {
 	ChainedList * actualRef = chainHead->next;
 	ChainedList * prevRef = chainHead;
 
-
 	int count = 0;
 
 	//Enquanto existir proximo e o contador não for igual ao index
