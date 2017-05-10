@@ -9,17 +9,17 @@ typedef struct TypeChainedList {
 } ChainedList;
 
 
-ChainedList * initChainedList();
-ChainedList * getLastRef(ChainedList *chainedList);
+ChainedList * initChain();
 
-void* getFromChainedList(ChainedList *chainedList, int index);
+void* getChainDataAt(ChainedList *chainHead, int elementAt);
 
-void addToChainedList(ChainedList *chainedList, void * data);
+void addToChain(ChainedList *chainHead, void * data);
 
-void addIntegerToChainedList(ChainedList *chainedList, int value);
+void addToChainAt(ChainedList *chainHead, void * data, int index);
 
-void removeFromChainedList(ChainedList *chainedList, int index);
-int getChainedListLength(ChainedList *chainedList);
+void removeFromChain(ChainedList *chainHead, int index);
 
-bool isChanedListEmpty(ChainedList * chainedList);
+int getChainLength(ChainedList *chainHead);
+
+bool isChainEmpty(ChainedList * chainHead);
 #endif // !_CHAINED_LIST_

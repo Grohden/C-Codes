@@ -4,116 +4,152 @@
 #include "../utils.h"
 #include "chainedList.h"
 
-ChainedList * initChainedList() {
-	ChainedList * c = calloc(1, sizeof(ChainedList));
-	c->next = NULL;
+//Private
+ChainedList * getChainAt(ChainedList *chainHead, int chainAt);
+ChainedList * getLastChain(ChainedList *chainHead);
 
-
-
-	//O tamanho da lista encadeada vai estar no primeiro elo da lista
-	c->data = calloc(1, sizeof(int)); //Aloca espaço para o contador do tamanho
-	int *size = (c->data); //Pega o ponteiro para o espaço alocado
-	*size = 0; //Seta o valor na memoria
-
-	return c;
+void printChainData(ChainedList * head) {
+	println("========");
+	println("Next: %p", head->next);
+	println("Data: %p", head->data);
+	println("========");
 }
 
-void* getFromChainedList(ChainedList *chainedList, int index) {
-	
-	if (index > getChainedListLength(chainedList) - 1) {
-		println("Nao e possivel pegar o item, index fora dos limites");
-		return NULL;
-	}
 
-	if (isChanedListEmpty(chainedList)) {
-		println("Nao e possivel pegar o item, lista vazia");
-		return NULL;
-	}
-
-	//Next pois o primeiro elo nao é contado
-	ChainedList * chainRef = chainedList->next;
-
-	int count = 0;
-
-	//Enquanto existir proximo e o contador não for igual ao index
-	while(chainRef->next != 0 && count != index) {
-		chainRef = chainRef->next;
-		count++;
-	}
-
-	//Se achou o item o retorna
-	if (count == index) {
-		return chainRef->data;
-	}
-
-	//Em teoria nao vai cair aqui nunca pelo primeiro if, so se a index for negativa
-	println("Item no index %d nao foi achado", index);
-	return NULL;
+ChainedList* getLastRef(ChainedList *chainHead) {
+	return getChainAt(chainHead, getChainLength(chainHead) - 1);
 }
 
-ChainedList* getLastRef(ChainedList *chainedList) {
-
-	if (isChanedListEmpty(chainedList)) {
-		return chainedList;
+ChainedList * getChainAt(ChainedList *chainHead, int chainAt) {
+	if (isChainEmpty(chainHead)) {
+		return chainHead;
 	}
 
-	//Next pois o primeiro elo nao é contado
-	ChainedList * nextRef = chainedList->next;
+	if ((getChainLength(chainHead)-1) > chainAt || chainAt < 0) {
+		println("Index fora dos limites: %d", chainAt);
+	}
+
+	//Next pois o head nao é contado
+	ChainedList * nextRef = chainHead->next;
+	int index = 0;
 
 	//Enquanto não achar o ultimo
-	while (nextRef->next != 0) {
+	while (nextRef->next != 0 && index != chainAt) {
 		//ALERT: Nao printar nada aqui hehe
 		nextRef = nextRef->next;
+		index++;
 	}
 
 	//Retorna referencia ao ultimo
 	return nextRef;
 }
 
-void addIntegerToChainedList(ChainedList *chainedList, int value) {
-	//Essa funcao nao deveria existir, nao é do escopo da lista encadeada
-	//Alocar memoria para um inteiro e guarda-lo, quem deve fazer isto
-	//é o programador que estiver usando a implementaçao
-	int * reference = calloc(1, sizeof(int));
-	*reference = value;
 
-	addToChainedList(chainedList, (void *) reference);
+//Public
+
+ChainedList * initChain() {
+	ChainedList * head = calloc(1, sizeof(ChainedList));
+	head->next = NULL;
+
+
+	//O tamanho da lista encadeada vai estar no primeiro elo da lista
+	head->data = calloc(1, sizeof(int)); //Aloca espaço para o contador do tamanho
+	int *size = (head->data); //Pega o ponteiro para o espaço alocado
+	*size = 0; //Seta o valor na memoria
+
+	return head;
 }
 
-void addToChainedList(ChainedList *chainedList, void * data) {
-	//Cria um novo elo (ALERT: nao usar o inicializar aqui, nao sao o mesmo tipo de elo)
-	ChainedList * next = calloc(1, sizeof(ChainedList));
-	//Coloca o dado fornecido
-	next->data = data;
-	//Aponta para o nada (0==NULL)
-	next->next = NULL;
+//inicio, procurar
+
+void* getChainDataAt(ChainedList *chainHead, int elementAt) {
 	
-	//Pega a ultima referencia e adiciona o proximo
-	(getLastRef(chainedList))->next = next;
+	if (elementAt > getChainLength(chainHead) - 1) {
+		println("Nao e possivel pegar o item, index fora dos limites");
+		return NULL;
+	}
+
+	if (isChainEmpty(chainHead)) {
+		println("Nao e possivel pegar o item, lista vazia");
+		return NULL;
+	}
+
+	//Next pois o primeiro elo nao é contado
+	ChainedList * chainRef = chainHead->next;
+
+	int count = 0;
+
+	//Enquanto existir proximo e o contador não for igual ao index
+	while(chainRef->next != 0 && count != elementAt) {
+		chainRef = chainRef->next;
+		count++;
+	}
+
+	//Se achou o item o retorna
+	if (count == elementAt) {
+		return chainRef->data;
+	}
+
+	//Em teoria nao vai cair aqui nunca pelo primeiro if, so se a index for negativa
+	println("Item no index %d nao foi achado", elementAt);
+	return NULL;
+}
+
+void addToChain(ChainedList *chainHead, void * data) {
+	addToChainAt(chainHead, data, getChainLength(chainHead) - 1);
+}
+
+void addToChainAt(ChainedList *chainHead, void * data, int index){
+	//Cria um novo elo (ALERT: nao usar o inicializar aqui, nao sao o mesmo tipo de elo)
+	ChainedList * newChain = calloc(1, sizeof(ChainedList));
+	//Coloca o dado fornecido
+	newChain->data = data;
+
+	ChainedList *previous;
+	//Anterior ao elemento do index
+	if (isChainEmpty(chainHead) || index == 0) {
+
+		previous = chainHead;
+	} else {
+		previous = (getChainAt(chainHead, index));
+	}
+
+	
+	//Elemento que esta no index requisitado
+	ChainedList *oldElementAtIndex = previous->next;
+
+	//O anterior recebe o novo elo
+	previous->next = newChain;
+
+	//Aponta para o elemento que estava antes no lugar
+	newChain->next = oldElementAtIndex;
+
 
 	//de-referenciando ponteiro para inteiro com cast e somando +1
-	(*(int*)chainedList->data)++;  //Lembrando que guardo o tamanho da lista encadeada no primeiro elo
+	(*(int*) chainHead->data)++;  //Lembrando que guardo o tamanho da lista encadeada no primeiro elo
 }
 
-void removeFromChainedList(ChainedList *chainedList, int index) {
-	if (isChanedListEmpty(chainedList)) {
+void removeFromChain(ChainedList *chainHead, int index) {
+	if (isChainEmpty(chainHead)) {
 		println("Nao é possivel remover, lista encadeada vazia");
 		return;
 	}
 
-	if (index > getChainedListLength(chainedList) - 1) {
+	if (index > getChainLength(chainHead) - 1) {
 		println("Index fora dos limites");
 		return;
 	}
 
 	//Next pois o primeiro elo nao é contado
-	ChainedList * actualRef = chainedList->next;
-	ChainedList * prevRef = chainedList; //Rever se isto esta certo..deveria ser NULL
+	ChainedList * actualRef = chainHead->next;
+	ChainedList * prevRef = NULL;
 
 	int count = 0;
 
 	//Enquanto existir proximo e o contador não for igual ao index
 	while (actualRef->next != 0 && count != index) {
+		println("AAAA");
+
 		//Referencia anterior recebe a atual
 		prevRef = actualRef;
 		//Atual recebe a proxima
@@ -128,18 +164,18 @@ void removeFromChainedList(ChainedList *chainedList, int index) {
 	free(actualRef);
 
 	//de-referenciando ponteiro para inteiro e tirando 1
-	(*(int*) chainedList->data)--; //Lembrando que guardo o tamanho da lista encadeada no primeiro elo
+	(*(int*) chainHead->data)--; //Lembrando que guardo o tamanho da lista encadeada no primeiro elo
 }
 
-int getChainedListLength(ChainedList *chainedList) {
-	if (isChanedListEmpty(chainedList)) {
+int getChainLength(ChainedList *chainHead) {
+	if (isChainEmpty(chainHead)) {
 		return 0;
 	}
 
 	//de-referenciando ponteiro para inteiro (em teoria, aqui deve sempre no minimo retornar 1)
-	return (*(int*) chainedList->data);
+	return (*(int*)chainHead->data);
 }
 
-bool isChanedListEmpty(ChainedList *chainedList) {
-	return chainedList->next == 0;
+bool isChainEmpty(ChainedList *chainHead) {
+	return chainHead->next == 0;
 }

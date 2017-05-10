@@ -2,46 +2,62 @@
 #include "../utils.h"
 #include <math.h>
 #include <string.h>
+#include <stdlib.h>
 
 void executeTests(int size);
 void testNumbers(ChainedList *list, int size);
 void testStrings(ChainedList *list, int size);
 
 void executeQueueTests(int size) {
-	ChainedList * l = initChainedList();
-	testNumbers(l,size);
+	ChainedList * l = initChain();
+	//testNumbers(l,size);
 	testStrings(l,size);
 }
 
 void testStrings(ChainedList *list,int size) {
-	addToChainedList(list, (void *) "lal");
-	addToChainedList(list, (void *) "test");
-	addToChainedList(list, (void *) "teste");
-	addToChainedList(list, (void *) "aaaaaa");
-	addToChainedList(list, (void *) "wroking(?)");
+	removeFromChain(list, 0);
+
+	addToChain(list, (void *) "lal");
+
+    println("aa");
+
+	removeFromChain(list, 0);
+
+
+    println("aa");
+
+	addToChain(list, (void *) "test");
+	addToChain(list, (void *) "teste");
+	addToChain(list, (void *) "aaaaaa");
+	addToChain(list, (void *) "wroking(?)");
 
 
 	println(
 		"Ultimo %s",
-		(char *) getFromChainedList(list, getChainedListLength(list) - 1)
+		(char *) getChainDataAt(list, getChainLength(list) - 1)
 	);
 }
 
 void testNumbers(ChainedList *list, int size) {
 	
-	int count = 1;
+	int *pointer;
+	int count = 0;
+
 
 	do {
-		addIntegerToChainedList(list, count);
+		pointer = malloc(sizeof(int));
+		*pointer = count;
+		addToChain(list, (void *) pointer);
+
 	} while (count++ < size);
 
 	println(
 		"Ultimo %d",
-		*((int *) getFromChainedList(list, getChainedListLength(list) - 1))
+		*((int *) getChainDataAt(list, getChainLength(list) - 1))
 	);
 
 	repeat(size) {
-		removeFromChainedList(list, 0);
+		removeFromChain(list, 0);
 	}
 }
 
