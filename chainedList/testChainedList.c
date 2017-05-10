@@ -34,6 +34,7 @@ void testStrings(ChainedList *list,int size) {
 	addToChain(list, (void *) "teste");
 	addToChain(list, (void *) "aaaaaa");
 	addToChain(list, (void *) "wroking(?)");
+	addToChainAt(list, (void *) "TestAtMiddle",4);
 
     printChainData(list);
 

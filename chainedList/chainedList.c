@@ -93,6 +93,10 @@ void addToChain(ChainedList *chainHead, void * data) {
 }
 
 void addToChainAt(ChainedList *chainHead, void * data, int index){
+    if(getChainLength(chainHead) < index){
+        println("Nao e possivel adicionar, index %d fora dos limites",index);
+        return;
+    }
 	//Cria um novo elo (ALERT: nao usar o inicializar aqui, nao sao o mesmo tipo de elo)
 	ChainedList * newChain = calloc(1, sizeof(ChainedList));
 	//Coloca o dado fornecido
