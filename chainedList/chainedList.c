@@ -22,14 +22,14 @@ ChainedList * getChainAt(ChainedList *chainHead, int chainAt) {
 		println("Index fora dos limites: %d", chainAt);
 	}
 
-	//Next pois o head nao é contado
-	ChainedList * nextRef = chainHead->next;
+	//Next pois o head nao ï¿½ contado
+	ChainedList * nextRef = (ChainedList*) chainHead->next;
 	int index = 0;
 
-	//Enquanto não achar o ultimo
+	//Enquanto nï¿½o achar o ultimo
 	while (nextRef->next != 0 && index != chainAt) {
 		//ALERT: Nao printar nada aqui hehe
-		nextRef = nextRef->next;
+		nextRef = (ChainedList*) nextRef->next;
 		index++;
 	}
 
@@ -41,13 +41,13 @@ ChainedList * getChainAt(ChainedList *chainHead, int chainAt) {
 //Public
 
 ChainedList * initChain() {
-	ChainedList * head = calloc(1, sizeof(ChainedList));
+	ChainedList * head = (ChainedList*) calloc(1, sizeof(ChainedList));
 	head->next = NULL;
 
 
 	//O tamanho da lista encadeada vai estar no primeiro elo da lista
-	head->data = calloc(1, sizeof(int)); //Aloca espaço para o contador do tamanho
-	int *size = (head->data); //Pega o ponteiro para o espaço alocado
+	head->data = calloc(1, sizeof(int)); //Aloca espaï¿½o para o contador do tamanho
+	int *size = (int*) (head->data); //Pega o ponteiro para o espaï¿½o alocado
 	*size = 0; //Seta o valor na memoria
 
 	return head;
@@ -67,14 +67,14 @@ void* getChainDataAt(ChainedList *chainHead, int elementAt) {
 		return NULL;
 	}
 
-	//Next pois o primeiro elo nao é contado
-	ChainedList * chainRef = chainHead->next;
+	//Next pois o primeiro elo nao ï¿½ contado
+	ChainedList * chainRef = (ChainedList*) chainHead->next;
 
 	int count = 0;
 
-	//Enquanto existir proximo e o contador não for igual ao index
+	//Enquanto existir proximo e o contador nï¿½o for igual ao index
 	while(chainRef->next != 0 && count != elementAt) {
-		chainRef = chainRef->next;
+		chainRef = (ChainedList*) chainRef->next;
 		count++;
 	}
 
@@ -98,7 +98,7 @@ void addToChainAt(ChainedList *chainHead, void * data, int index){
         return;
     }
 	//Cria um novo elo (ALERT: nao usar o inicializar aqui, nao sao o mesmo tipo de elo)
-	ChainedList * newChain = calloc(1, sizeof(ChainedList));
+	ChainedList * newChain = (ChainedList*) calloc(1, sizeof(ChainedList));
 	//Coloca o dado fornecido
 	newChain->data = data;
 
@@ -112,7 +112,7 @@ void addToChainAt(ChainedList *chainHead, void * data, int index){
 
 	
 	//Elemento que esta no index requisitado
-	ChainedList *oldElementAtIndex = previous->next;
+	ChainedList *oldElementAtIndex = (ChainedList*) previous->next;
 
 	//O anterior recebe o novo elo
 	previous->next = newChain;
@@ -137,18 +137,18 @@ void removeFromChain(ChainedList *chainHead, int index) {
 		return;
 	}
 
-	//Next pois o primeiro elo nao é contado
-	ChainedList * actualRef = chainHead->next;
+	//Next pois o primeiro elo nao ï¿½ contado
+	ChainedList * actualRef = (ChainedList*) chainHead->next;
 	ChainedList * prevRef = chainHead;
 
 	int count = 0;
 
-	//Enquanto existir proximo e o contador não for igual ao index
+	//Enquanto existir proximo e o contador nï¿½o for igual ao index
 	while (actualRef->next != 0 && count != index) {
 		//Referencia anterior recebe a atual
 		prevRef = actualRef;
 		//Atual recebe a proxima
-		actualRef = actualRef->next;
+		actualRef = (ChainedList*) actualRef->next;
 		count++;
 	}
 

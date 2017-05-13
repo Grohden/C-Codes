@@ -1,13 +1,13 @@
 #include "chainedList.h"
 #include "../utils.h"
+#include <stdbool.h>
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
 
 void executeTests(int size);
 void testNumbers(ChainedList *list, int size);
-void testStrings(ChainedList *list, int size);
-
+bool testStrings(ChainedList *list, int size);
 
 void printChainData(ChainedList * head) {
 	println("========");
@@ -23,7 +23,7 @@ void executeQueueTests(int size) {
 	testStrings(l,size);
 }
 
-void testStrings(ChainedList *list,int size) {
+bool testStrings(ChainedList *list,int size) {
 	removeFromChain(list, 0);
 
 	addToChain(list, (void *) "lal");
@@ -36,8 +36,9 @@ void testStrings(ChainedList *list,int size) {
 	addToChain(list, (void *) "wroking(?)");
 	addToChainAt(list, (void *) "TestAtMiddle",4);
 
-    printChainData(list);
+    removeFromChain(list, getChainLength(list)-1);
 
+    printChainData(list);
 
 	repeat(getChainLength(list)){
 	    println("%s", (char *) getChainDataAt(list,i));
@@ -51,6 +52,8 @@ void testStrings(ChainedList *list,int size) {
     }
 
     printChainData(list);
+
+	return true;
 }
 
 void testNumbers(ChainedList *list, int size) {
@@ -60,7 +63,7 @@ void testNumbers(ChainedList *list, int size) {
 
 
 	do {
-		pointer = malloc(sizeof(int));
+		pointer = (int*) malloc(sizeof(int));
 		*pointer = count;
 		addToChain(list, (void *) pointer);
 
