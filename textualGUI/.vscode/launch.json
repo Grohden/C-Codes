@@ -2,11 +2,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "C Debug",
+            "name": "C++ Launch",
             "type": "cppdbg",
             "request": "launch",
-            "miDebuggerPath":"C:\\MinGW\\bin\\gdb.exe",
-            "preLaunchTask": "debug-compile",
+            "miDebuggerPath": "C:\\MinGW\\bin\\gdb.exe",
             "program": "${workspaceRoot}/a.exe",
             "args": [],
             "stopAtEntry": false,

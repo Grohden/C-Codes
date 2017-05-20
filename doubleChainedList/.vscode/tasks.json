@@ -13,9 +13,9 @@
             "command": "g++",
             "args": [
                 "-g",
-                "chainedList.c",
-                "chainedList.h",
-                "testChainedList.c"
+                "doubleChainedList.c",
+                "doubleChainedList.h",
+                "testChain.c"
             ]
         }
     ]
