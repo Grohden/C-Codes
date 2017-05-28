@@ -89,7 +89,7 @@ void* getChainDataAt(ChainedList *chainHead, int elementAt) {
 }
 
 void addToChain(ChainedList *chainHead, void * data) {
-	addToChainAt(chainHead, data, getChainLength(chainHead) - 1);
+	addToChainAt(chainHead, data, getChainLength(chainHead));
 }
 
 void addToChainAt(ChainedList *chainHead, void * data, int index){

@@ -24,7 +24,7 @@ void setTextColor(int k) {
 void setScreenSize(int cols, int lines) {
 	//Command string format
 	char *format = "mode con:cols=%d lines=%d";
-	char *command = calloc(strlen(format), sizeof(char));
+	char *command = (char *) calloc(strlen(format), sizeof(char));
 	sprintf(command, format, cols, lines);
 	system(command);
 
