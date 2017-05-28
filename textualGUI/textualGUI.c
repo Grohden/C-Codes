@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <conio.h>
 #include "textualGUI.h"
-#include "specifics.h"
+#include "../SO/specifics.h"
 #include "../utils.h"
 #include "../chainedList/chainedList.h"
 

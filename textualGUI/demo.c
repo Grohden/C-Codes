@@ -2,7 +2,7 @@
 #include <string.h>
 #include "../utils.h"
 #include "textualGUI.h"
-#include "specifics.h"
+#include "../SO/specifics.h"
 #include "../chainedList/chainedList.h"
 
 #define SCREEN_RATIO 40

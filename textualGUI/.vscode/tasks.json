@@ -8,10 +8,10 @@
         "-g",
         "-Wall",
         "demo.c",
-        "specifics.c",
-        "specifics.h",
         "textualGUI.c",
         "textualGUI.h",
+        "../SO/specifics.c",
+        "../SO/specifics.h",
         "../chainedList/chainedList.h",
         "../chainedList/chainedList.c"
     ],
