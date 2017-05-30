@@ -6,10 +6,6 @@ int _screenHeight_ = 0;
 int _screenWidth_ = 0;
 char *screenSizeCommand;
 
-void clearScreen() {
-	system("cls");
-};
-
 void putCursorAt(int horizontalPosition, int verticalPosition) {
 	COORD p = { horizontalPosition, verticalPosition };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), p);
@@ -23,7 +19,7 @@ void setTextColor(int k) {
 
 void setScreenSize(int cols, int lines) {
 	//Command string format
-	char *format = "mode con:cols=%d lines=%d";
+	char format[] = "mode con:cols=%d lines=%d";
 	char *command = (char *) calloc(strlen(format), sizeof(char));
 	sprintf(command, format, cols, lines);
 	system(command);

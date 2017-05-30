@@ -9,10 +9,12 @@
 #define SCREEN_WIDTH 150
 #define SCREEN_HEIGHT 40
 
+#define pause() system("pause")
+//This should be a "macro"
+#define clearScreen() system("cls")
+
 //Keyboard numbers for arrows.
 typedef enum { UP = 72, DOWN = 80, LEFT = 75, RIGHT = 77 } direction;
-
-void clearScreen();
 
 int getScreenHeight();
 

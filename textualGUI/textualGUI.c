@@ -140,6 +140,10 @@ int drawSelectableList(ChainedList *options, bool circularSelection) {
 	//Put the cursor at the bottom
 	putCursorAt(0, getScreenHeight() - 2);
 
+
+	//Flush to prevent buffer keys
+	fflush(stdin);
+	
 	//Return the selected option number
 	return selectedOption;
 }
