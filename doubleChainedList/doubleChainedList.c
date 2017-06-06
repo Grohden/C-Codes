@@ -133,14 +133,20 @@ void * getDoubleChainDataAt(DoubleChainedList *chainHead, int elementAt)
 //Adiciona no fim
 void addToDoubleChainEnd(DoubleChainedList *chainHead, void *data)
 {
-	DoubleChainedList *newLast = (DoubleChainedList *)calloc(1, sizeof(DoubleChainedList));
-	DoubleChainedList *oldLast = (DoubleChainedList *)chainHead->previous;
+	DoubleChainedList *newLast = (DoubleChainedList *) calloc(1, sizeof(DoubleChainedList));
+	DoubleChainedList *oldLast = (DoubleChainedList *) chainHead->previous;
 
 	//Seta o dado
 	newLast->data = data;
 
-	//Se so tem um elo
-	if (getDoubleChainLength(chainHead) == 1)
+	if(getDoubleChainLength(chainHead) == 0)
+	{
+		newLast->previous = newLast;
+		newLast->next = newLast;
+
+		chainHead->next = newLast;
+	}
+	else if (getDoubleChainLength(chainHead) == 1)
 	{
 
 		newLast->next = oldLast;
@@ -173,6 +179,10 @@ void addToDoubleChainEnd(DoubleChainedList *chainHead, void *data)
 
 void addToDoubleChainAt(DoubleChainedList *chainHead, void *data, int index)
 {
+	if(getDoubleChainLength(chainHead)+1 < index){
+		println("Nao e possivel adicionar, index fora dos limites");
+		return;
+	}
 
 	if (index == 0)
 	{

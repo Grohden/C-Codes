@@ -15,7 +15,14 @@
                 "-g",
                 "doubleChainedList.c",
                 "doubleChainedList.h",
-                "testChain.c"
+                "testChain.c",
+                "../utils.h",
+                "../SO/specifics.c",
+                "../SO/specifics.h",
+                "../textualGUI/textualGUI.h",
+                "../textualGUI/textualGUI.c",
+                "../chainedList/chainedList.h",
+                "../chainedList/chainedList.c"
             ]
         }
     ]
