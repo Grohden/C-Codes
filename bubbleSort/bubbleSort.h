@@ -4,6 +4,6 @@
 #define _BUBBLE_SORT_
 
 
-void bubbleSortIntArray(int array[], int size);
+int bubbleSortIntArray(int array[], int size);
 
 #endif // !_BUBBLE_SORT_

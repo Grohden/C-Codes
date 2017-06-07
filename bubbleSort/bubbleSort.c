@@ -5,7 +5,7 @@
 #include "bubbleSort.h"
 
 
-void bubbleSortIntArray(int array[], int size){
+int bubbleSortIntArray(int array[], int size){
 	int swapCount = 0;
 	int index = 0;
 	int tempValue;
@@ -34,5 +34,7 @@ void bubbleSortIntArray(int array[], int size){
 		index = 0;
 	}
 
-	println("Swap count for bubble: %d", swapCount);
+	//println("Swap count for bubble: %d", swapCount);
+	
+	return swapCount;
 }
