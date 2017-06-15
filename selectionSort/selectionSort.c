@@ -5,6 +5,19 @@
 #include "selectionSort.h"
 
 
+
+void printItArray(int array[], int size){
+	int index = 0;
+	each(index, size){
+		printf(" %d ", array[index]);
+	}
+
+	printf("\n size %d", size);
+	printf("\n");
+	printf("\n");
+	printf("\n");
+}
+
 void selectionSortIntArray(int array[], int size){
 	int timesFoundMinor = 0;
 	int minorIndex;
@@ -28,13 +41,14 @@ void selectionSortIntArray(int array[], int size){
 		}
 
 		//Se realmente precisa trocar
-		if(i == minorIndex){
+		if(i != minorIndex){
 			//Troca o atual pelo menor
 			temp = array[i];
 			array[i] = array[minorIndex];
 			array[minorIndex] = temp;
 		}
 
+		printItArray(array,size);
 		i++;
 	}
 

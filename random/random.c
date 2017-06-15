@@ -24,7 +24,7 @@ int * generateRandomArray(int size){
 
 	while(arrayLen++ <  size - 1){
 		randomArray[arrayLen] = getRandomNumber()/100;
-		printf("%d \t", randomArray[arrayLen]);
+		//printf("%d \t", randomArray[arrayLen]);
 	}
 
 	return randomArray;
