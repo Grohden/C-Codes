@@ -12,10 +12,14 @@ void selectionSortIntArray(int array[], int size){
 	int i = 0;
 	int j = 0;
 
+	//index do atual elemento a ser trocado
 	while(i < size){
 		minorIndex = i;
 		j = i;
+		
+		//Index da procura
 		while(j < size){
+			// Registra o index do menor valor
 			if(array[j] < array[minorIndex]){
 				minorIndex = j;
 				timesFoundMinor++;
@@ -23,9 +27,14 @@ void selectionSortIntArray(int array[], int size){
 			j++;
 		}
 
-		temp = array[i];
-		array[i] = array[minorIndex];
-		array[minorIndex] = temp;
+		//Se realmente precisa trocar
+		if(i == minorIndex){
+			//Troca o atual pelo menor
+			temp = array[i];
+			array[i] = array[minorIndex];
+			array[minorIndex] = temp;
+		}
+
 		i++;
 	}
 
