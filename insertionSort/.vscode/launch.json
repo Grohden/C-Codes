@@ -7,7 +7,7 @@
             "request": "launch",
             "miDebuggerPath":"C:\\MinGW\\bin\\gdb.exe",
             "preLaunchTask": "debug",
-            "program": "${workspaceRoot}/bubbleSort.exe",
+            "program": "${workspaceRoot}/insertionSort.exe",
             "stopAtEntry": false,
             "cwd": "${workspaceRoot}",
             "environment": [],

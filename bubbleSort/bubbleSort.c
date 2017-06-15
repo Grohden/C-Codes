@@ -2,15 +2,16 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "../utils.h"
+#include "../sortUtils.h"
 #include "bubbleSort.h"
 
 
 int bubbleSortIntArray(int array[], int size){
+	bool isOrdered = false;
 	int swapCount = 0;
+	int comparisons = 0;
 	int index = 0;
 	int n = 1;
-	int tempValue;
-	bool isOrdered = false;
 
 	//Enquanto nao estiver ordenado
 	while(!isOrdered){
@@ -19,15 +20,13 @@ int bubbleSortIntArray(int array[], int size){
 		while(index < size - n){
 			//Se achou alguem para ordenar (Sempre garante que o maior vai para o final)
 			if(array[index] > array[index + 1]){
-				tempValue 		= array[index];
-				array[index] 		= array[index + 1];
-				array[index + 1	]	= tempValue;
-				
+				swapVariables(&array[index],&array[index+1]);				
 				swapCount++;
 
 				//Diz que nao esta ordenado
 				isOrdered = false;
 			}
+			comparisons++;
 			index++;
 		}
 
@@ -36,7 +35,7 @@ int bubbleSortIntArray(int array[], int size){
 		n++;
 	}
 
-	//println("Swap count for bubble: %d", swapCount);
+	println("bubbleSort: Swaps %d, Comparisons: %d", swapCount, comparisons);
 	
 	return swapCount;
 }

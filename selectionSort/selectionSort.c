@@ -2,26 +2,15 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "../utils.h"
+#include "../sortUtils.h"
 #include "selectionSort.h"
 
+int selectionSortIntArray(int array[], int size){
+	//Contadores
+	int comparisons = 0;
+	int swapCount = 0;
 
-
-void printItArray(int array[], int size){
-	int index = 0;
-	each(index, size){
-		printf(" %d ", array[index]);
-	}
-
-	printf("\n size %d", size);
-	printf("\n");
-	printf("\n");
-	printf("\n");
-}
-
-void selectionSortIntArray(int array[], int size){
-	int timesFoundMinor = 0;
 	int minorIndex;
-	int temp;
 	int i = 0;
 	int j = 0;
 
@@ -35,22 +24,22 @@ void selectionSortIntArray(int array[], int size){
 			// Registra o index do menor valor
 			if(array[j] < array[minorIndex]){
 				minorIndex = j;
-				timesFoundMinor++;
 			}
+
+			comparisons++;
 			j++;
 		}
 
 		//Se realmente precisa trocar
 		if(i != minorIndex){
 			//Troca o atual pelo menor
-			temp = array[i];
-			array[i] = array[minorIndex];
-			array[minorIndex] = temp;
+			swapVariables(&array[i],&array[minorIndex]);
+			swapCount++;
 		}
 
-		printItArray(array,size);
 		i++;
 	}
 
-	println("Times found minor for selection: %d", timesFoundMinor);
+	println("selectionSort: Swaps %d, Comparisons: %d", swapCount, comparisons);
+	return swapCount;
 }

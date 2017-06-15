@@ -4,6 +4,6 @@
 #define _BUBBLE_SORT_
 
 
-void selectionSortIntArray(int array[], int size);
+int selectionSortIntArray(int array[], int size);
 
 #endif // !_BUBBLE_SORT_
