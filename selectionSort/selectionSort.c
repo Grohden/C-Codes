@@ -6,6 +6,10 @@
 #include "selectionSort.h"
 
 int selectionSortIntArray(int array[], int size){
+	if(size <= 1){
+		return -1;
+	}
+
 	//Contadores
 	int comparisons = 0;
 	int swapCount = 0;

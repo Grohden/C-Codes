@@ -7,6 +7,10 @@
 
 
 int bubbleSortIntArray(int array[], int size){
+	if(size <= 1){
+		return -1;
+	}
+
 	bool isOrdered = false;
 	int swapCount = 0;
 	int comparisons = 0;

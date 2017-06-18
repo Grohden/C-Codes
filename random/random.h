@@ -5,5 +5,4 @@ int getRandomNumber();
 
 int * generateRandomArray(int size);
 
-
 #endif // !_RANDOM_

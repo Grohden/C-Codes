@@ -1,19 +1,12 @@
 #include "selectionSort.h"
 #include "../utils.h"
+#include "../sortUtils.h"
 #include "../SO/specifics.h"
 #include "../random/random.h"
 #include <stdbool.h>
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
-
-void printIntArray(int array[], int size){
-	int index = 0;
-	each(index, size){
-		println(" index - %2d | nr - %d", index, array[index]);
-
-	}
-}
 
 //TODO escrever os testes
 int main(int argc, char * argv[]) {

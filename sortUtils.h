@@ -4,4 +4,6 @@
 
 void swapVariables(int *i, int *j);
 
+void printIntArray(int array[], int size);
+
 #endif // _SORT_UTILS_

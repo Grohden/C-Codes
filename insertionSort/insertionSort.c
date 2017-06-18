@@ -5,8 +5,10 @@
 #include "../sortUtils.h"
 #include "insertionSort.h"
 
-
 int insertionSortIntArray(int array[], int size){
+	if(size <= 1){
+		return -1;
+	}
 	int swapCount = 0;
 	int comparisons = 0;
 	int i = 0;

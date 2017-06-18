@@ -1,4 +1,4 @@
-#include "insertionSort.h"
+#include "quickSort.h"
 #include "../utils.h"
 #include "../sortUtils.h"
 #include "../SO/specifics.h" //pause
@@ -12,12 +12,20 @@
 //TODO escrever os testes
 int main(int argc, char * argv[]) {
 
-	int len = 30;
-	int * array = generateRandomArray(len);
+	int len = 10;
+	int i = 0;
+	int swapCount;
+	int * array;
 
-	insertionSortIntArray(array, len);
-	
-	printIntArray(array,len);
+	while(i++ < len){
+
+		array = generateRandomArray(len);
+
+		swapCount = quickSortIntArray(array, len);
+		println("swapCount %d", swapCount);
+
+		printIntArray(array,len);
+	}
 
 	pause();
 
