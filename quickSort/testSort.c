@@ -21,8 +21,8 @@ int main(int argc, char * argv[]) {
 
 		array = generateRandomArray(len);
 
-		swapCount = quickSortIntArray(array, len);
-		println("swapCount %d", swapCount);
+		SortData *data = quickSortIntArray(array, len);
+		println("quickSort: Swaps %d, Comparisons: %d", data->swaps, data->comparisons);
 
 		printIntArray(array,len);
 	}

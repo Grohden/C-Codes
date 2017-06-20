@@ -6,9 +6,13 @@
 #include "bubbleSort.h"
 
 
-int bubbleSortIntArray(int array[], int size){
+SortData* bubbleSortIntArray(int array[], int size){
+	SortData *sortData = (SortData *) calloc(sizeof(SortData),1);
+	sortData->comparisons = 0;
+	sortData->swaps = 0;
+
 	if(size <= 1){
-		return -1;
+		return sortData;
 	}
 
 	bool isOrdered = false;
@@ -39,7 +43,7 @@ int bubbleSortIntArray(int array[], int size){
 		n++;
 	}
 
-	println("bubbleSort: Swaps %d, Comparisons: %d", swapCount, comparisons);
-	
-	return swapCount;
+	sortData->comparisons = comparisons;
+	sortData->swaps = swapCount;
+	return sortData;
 }

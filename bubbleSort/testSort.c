@@ -15,8 +15,9 @@ int main(int argc, char * argv[]) {
 	int len = 30;
 	int * array = generateRandomArray(len);
 
-	bubbleSortIntArray(array, len);
+	SortData *data = bubbleSortIntArray(array, len);
 
+	println("bubbleSort: Swaps %d, Comparisons: %d", data->swaps, data->comparisons);
 	printIntArray(array, len);
 
 	pause();

@@ -5,12 +5,18 @@
 #include "../sortUtils.h"
 #include "insertionSort.h"
 
-int insertionSortIntArray(int array[], int size){
+SortData* insertionSortIntArray(int array[], int size){
+	SortData *sortData = (SortData *) calloc(sizeof(SortData),1);
+	sortData->comparisons = 0;
+	sortData->swaps = 0;
+
 	if(size <= 1){
-		return -1;
+		return sortData;
 	}
+
 	int swapCount = 0;
 	int comparisons = 0;
+
 	int i = 0;
 	int j = 0;
 	
@@ -32,6 +38,7 @@ int insertionSortIntArray(int array[], int size){
 		i++;
 	}
 
-	println("insertionSort: Swaps %d, Comparisons: %d", swapCount, comparisons);
-	return swapCount;
+	sortData->comparisons = comparisons;
+	sortData->swaps = swapCount;
+	return sortData;
 }

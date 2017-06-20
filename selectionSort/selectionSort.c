@@ -5,9 +5,13 @@
 #include "../sortUtils.h"
 #include "selectionSort.h"
 
-int selectionSortIntArray(int array[], int size){
+SortData* selectionSortIntArray(int array[], int size){
+	SortData *sortData = (SortData *) calloc(sizeof(SortData),1);
+	sortData->comparisons = 0;
+	sortData->swaps = 0;
+
 	if(size <= 1){
-		return -1;
+		return sortData;
 	}
 
 	//Contadores
@@ -44,6 +48,7 @@ int selectionSortIntArray(int array[], int size){
 		i++;
 	}
 
-	println("selectionSort: Swaps %d, Comparisons: %d", swapCount, comparisons);
-	return swapCount;
+	sortData->comparisons = comparisons;
+	sortData->swaps = swapCount;
+	return sortData;
 }

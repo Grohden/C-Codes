@@ -15,8 +15,9 @@ int main(int argc, char * argv[]) {
 	int len = 30;
 	int * array = generateRandomArray(len);
 
-	insertionSortIntArray(array, len);
-	
+	SortData *data = insertionSortIntArray(array, len);
+
+	println("insertionSort: Swaps %d, Comparisons: %d", data->swaps, data->comparisons);
 	printIntArray(array,len);
 
 	pause();
