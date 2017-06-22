@@ -6,16 +6,11 @@
 #include "insertionSort.h"
 
 SortData* insertionSortIntArray(int array[], int size){
-	SortData *sortData = (SortData *) calloc(sizeof(SortData),1);
-	sortData->comparisons = 0;
-	sortData->swaps = 0;
+	SortData *sortData = initSortData();
 
 	if(size <= 1){
 		return sortData;
 	}
-
-	int swapCount = 0;
-	int comparisons = 0;
 
 	int i = 0;
 	int j = 0;
@@ -24,10 +19,10 @@ SortData* insertionSortIntArray(int array[], int size){
 		j = i;
 
 		while(j >= 0){
-			comparisons++;
+			(sortData->comparisons)++;
 			if(array[j] > array[j + 1]){
 				swapVariables(&array[j],&array[j+1]);
-				swapCount++;
+				(sortData->swaps)++;
 			} else {
 				break;
 			}
@@ -38,7 +33,5 @@ SortData* insertionSortIntArray(int array[], int size){
 		i++;
 	}
 
-	sortData->comparisons = comparisons;
-	sortData->swaps = swapCount;
 	return sortData;
 }

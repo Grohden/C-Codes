@@ -1,10 +1,13 @@
 CC=gcc
 
-build: SELECTION_SORT INSERTION_SORT QUICK_SORT BUBBLE_SORT UTILS
-	$(CC) benchmark.c selectionSort.o insertionSort.o quickSort.o bubbleSort.o sortUtils.o random.o -o benchmark
+build: MAIN SELECTION_SORT INSERTION_SORT QUICK_SORT BUBBLE_SORT UTILS
+	$(CC) benchmark.o selectionSort.o insertionSort.o quickSort.o bubbleSort.o sortUtils.o random.o -o benchmark
 
-debug: SELECTION_SORT INSERTION_SORT QUICK_SORT BUBBLE_SORT UTILS
-	$(CC) -g benchmark.c selectionSort.o insertionSort.o quickSort.o bubbleSort.o sortUtils.o random.o -o benchmark
+debug: MAIN SELECTION_SORT INSERTION_SORT QUICK_SORT BUBBLE_SORT UTILS
+	$(CC) -g benchmark.o selectionSort.o insertionSort.o quickSort.o bubbleSort.o sortUtils.o random.o -o benchmark
+
+MAIN:
+	$(CC) -c -g benchmark.c
 
 SELECTION_SORT:
 	$(CC) -c ../selectionSort/selectionSort.c

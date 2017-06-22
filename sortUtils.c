@@ -1,5 +1,7 @@
 #include "utils.h"
+#include "sortUtils.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 void swapVariables(int *i, int *j){
 	if(i == j){
@@ -10,6 +12,13 @@ void swapVariables(int *i, int *j){
     
     *j = (*i) - (*j);
     *i = (*i) - (*j);
+}
+
+SortData * initSortData(){
+	SortData *sortData = (SortData*) calloc(1,sizeof(SortData));
+	sortData->swaps = 0;
+	sortData->comparisons = 0;
+	return sortData;
 }
 
 void printIntArray(int array[], int size){

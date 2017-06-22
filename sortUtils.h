@@ -7,6 +7,8 @@ typedef struct TypeSortData {
     int swaps;
 } SortData;
 
+SortData * initSortData();
+
 void swapVariables(int *i, int *j);
 
 void printIntArray(int array[], int size);
