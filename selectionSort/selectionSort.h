@@ -1,9 +1,9 @@
 #include <stdbool.h>
 #include "../sortUtils.h"
 
-#ifndef _BUBBLE_SORT_
-#define _BUBBLE_SORT_
+#ifndef _SELECTION_SORT_
+#define _SELECTION_SORT_
 
 SortData* selectionSortIntArray(int array[], int size);
 
-#endif // !_BUBBLE_SORT_
+#endif // !_SELECTION_SORT_
