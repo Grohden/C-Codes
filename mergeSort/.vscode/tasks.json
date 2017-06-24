@@ -9,7 +9,7 @@
         {
             "isBuildCommand": true,
             "taskName": "debug",
-            "args": ["build"]            
+            "args": ["debug"]            
         },
         {
             "taskName": "build",
