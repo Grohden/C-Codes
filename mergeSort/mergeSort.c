@@ -25,6 +25,8 @@ void merge(int vetor[], int start, int middle, int end, SortData* sortDataStruct
 			tempArray[comAux] = vetor[startTwo];
 			startTwo++;
 		}
+		sortDataStruct->comparisons++;
+
 		comAux++;
 	}
 
@@ -33,6 +35,8 @@ void merge(int vetor[], int start, int middle, int end, SortData* sortDataStruct
 		tempArray[comAux] = vetor[startOne];
 		comAux++;
 		startOne++;
+
+		sortDataStruct->comparisons++;
 	}
 
 	//Caso ainda haja elementos na segunda metade
@@ -40,17 +44,20 @@ void merge(int vetor[], int start, int middle, int end, SortData* sortDataStruct
 		tempArray[comAux] = vetor[startTwo];
 		comAux++;
 		startTwo++;
+
+		sortDataStruct->comparisons++;
 	}
 	
 	//Move os elementos de volta para o vetor original
 	for (comAux = start; comAux <= end; comAux++){ 
 		vetor[comAux] = tempArray[comAux - start];
+		
+		sortDataStruct->swaps++;
 	}
 }
 
 void delegatedMergeSort(int array[],int start, int end, SortData *sortDataStruct){
-	if (start < end)
-	{
+	if (start < end){
 		int middle = (start + end) / 2;
 
 		delegatedMergeSort(array, start, middle, sortDataStruct);
