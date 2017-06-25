@@ -34,8 +34,11 @@ void addValueToTree(Node *root,int leafValue){
 		previousNode = leaf;
 		if(leafValue > leaf->info){
 			leaf = leaf->right;
-		} else {
+		} else if(leafValue < leaf->info) {
 			leaf = leaf->left;
+		} else {
+			// Valor ja presente na arvore
+			return;
 		}
 
 		if(leaf == NULL){

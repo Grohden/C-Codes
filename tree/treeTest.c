@@ -1,13 +1,13 @@
 #include "../utils.h"
-#include "../random/random.c"
+#include "../random/random.h"
 #include "tree.h"
 
 void main(int argc, int argv[]){
-    Node *root = initTree(25);
+    Node *root = initTree(getRandomNumber()/100);
 
     int i = 50;
     while(i--){
-        addValueToTree(root, i);
+        addValueToTree(root, getRandomNumber()/100);
     }
 
     system("pause");

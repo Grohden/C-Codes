@@ -14,7 +14,7 @@ void makeSureSeed(){
 
 int getRandomNumber(){
     makeSureSeed();
-	return  rand();
+	return rand();
 };
 
 

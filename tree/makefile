@@ -1,13 +1,16 @@
 CC=gcc
 
-build: MAIN TREE
+build: MAIN TREE RANDOM
 	$(CC) *.o -o tree
 
-debug: MAIN TREE
+debug: MAIN TREE RANDOM
 	$(CC) -g *.o -o tree
 
 MAIN:
-	$(CC) -c treeTest.c
+	$(CC) -g -c treeTest.c
 
 TREE:
 	$(CC) -c tree.c
+
+RANDOM:
+	$(CC) -c ../random/random.c
