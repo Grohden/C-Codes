@@ -6,4 +6,6 @@ typedef struct TypeNode {
 } Node;
 
 
-Node* initTree();
+Node* initTree(int rootValue);
+
+void addValueToTree(Node *root,int leafValue);
