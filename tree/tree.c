@@ -11,16 +11,16 @@
 
 void treeShowCentered(Node *root){
       if (root != NULL){
-            centered(root->left);
+            treeShowCentered(root->left);
             printf(" %d ",root->info);
-            centered(root->right);
+            treeShowCentered(root->right);
       }
 }
 
 void treeShowPosFixed(Node *root){
       if (root != NULL){
-            posFixed(root->left);
-            posFixed(root->right);
+            treeShowPosFixed(root->left);
+            treeShowPosFixed(root->right);
             printf(" %d ",root->info);
       }
 }
@@ -28,8 +28,8 @@ void treeShowPosFixed(Node *root){
 void treeShowPreFixed(Node *root){
       if (root != NULL){
             printf(" %d ",root->info);
-            preFixed(root->left);
-            preFixed(root->right);
+            treeShowPreFixed(root->left);
+            treeShowPreFixed(root->right);
       }
 }
 
