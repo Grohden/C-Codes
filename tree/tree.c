@@ -8,6 +8,31 @@
 #include "../SO/specifics.h"
 #include "../random/random.h"
 
+
+void treeShowCentered(Node *root){
+      if (root != NULL){
+            centered(root->left);
+            printf(" %d ",root->info);
+            centered(root->right);
+      }
+}
+
+void treeShowPosFixed(Node *root){
+      if (root != NULL){
+            posFixed(root->left);
+            posFixed(root->right);
+            printf(" %d ",root->info);
+      }
+}
+
+void treeShowPreFixed(Node *root){
+      if (root != NULL){
+            printf(" %d ",root->info);
+            preFixed(root->left);
+            preFixed(root->right);
+      }
+}
+
 Node* initTree(int rootValue){
 	Node *root = calloc(1,sizeof(Node));
 	root->info = rootValue;

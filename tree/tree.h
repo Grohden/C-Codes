@@ -5,6 +5,9 @@ typedef struct TypeNode {
     struct TypeNode *right;
 } Node;
 
+void treeShowCentered(Node *root);
+void treeShowPosFixed(Node *root);
+void treeShowPreFixed(Node *root);
 
 Node* initTree(int rootValue);
 

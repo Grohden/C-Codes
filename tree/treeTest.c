@@ -1,5 +1,7 @@
 #include "../utils.h"
 #include "../random/random.h"
+#include "../textualGUI/textualGUI.h"
+#include "../chainedList/chainedList.h"
 #include "tree.h"
 
 void main(int argc, int argv[]){
