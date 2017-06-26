@@ -5,9 +5,6 @@
 #include <stdlib.h>
 #include "tree.h"
 #include "../utils.h"
-#include "../SO/specifics.h"
-#include "../random/random.h"
-
 
 void treeShowCentered(Node *root){
       if (root != NULL){

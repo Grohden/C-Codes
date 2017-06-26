@@ -1,4 +1,4 @@
-
+#include <stdlib.h>
 
 #ifndef _SO_SPECIFICS_
 #define _SO_SPECIFICS_
