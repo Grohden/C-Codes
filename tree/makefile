@@ -1,9 +1,9 @@
 CC=gcc
 
-build: MAIN TREE RANDOM TEXTUAL_GUI CHAINED_LIST SO
+build: MAIN TREE TEXTUAL_GUI CHAINED_LIST SO
 	$(CC) *.o -o tree
 
-debug: MAIN TREE RANDOM TEXTUAL_GUI CHAINED_LIST SO
+debug: MAIN TREE TEXTUAL_GUI CHAINED_LIST SO
 	$(CC) -g *.o -o tree
 
 MAIN:
@@ -20,6 +20,3 @@ TEXTUAL_GUI:
 
 SO: 
 	$(CC) -c ../SO/specifics.c
-
-RANDOM:
-	$(CC) -c ../random/random.c

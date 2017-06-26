@@ -1,6 +1,5 @@
 #include "../utils.h"
 #include "../SO/specifics.h"
-#include "../random/random.h"
 #include "../textualGUI/textualGUI.h"
 #include "../chainedList/chainedList.h"
 #include "tree.h"
