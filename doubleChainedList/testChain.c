@@ -1,5 +1,6 @@
 #include "doubleChainedList.h"
 #include "../utils.h"
+#include "../random/random.h"
 #include "../chainedList/chainedList.h"
 #include "../SO/specifics.h"
 #include "../textualGUI/textualGUI.h"
@@ -40,118 +41,50 @@ void testString(){
 	}
 }
 
-
-void showData(DoubleChainedList *chainHead){
-	if(isDoubleChainEmpty(chainHead)){
-		println("Fila encadeada vazia");
-		pause();
-		return;
-	}
-
+static void printList(DoubleChainedList *list){
 	int index = 0;
-	println("Informe o a posicao do dado a ser visualizado: ");
-	scanf("%d",&index);
-
-	putCursorAt(0, getScreenHeight() - 5);
-
-	Conta *conta;
-	conta = (Conta *) getDoubleChainDataAt(chainHead, index);
-
-	if(conta != NULL){
-		println("Nome: %s", conta->nome);
-		println("Numero da conta corrente: %d", conta->nrContaCorrente);
-	}
-	pause();
-};
-
-void removeConta(DoubleChainedList* chainHead){
-	if(isDoubleChainEmpty(chainHead)){
-		println("Fila encadeada vazia");
-		pause();
-		return;
-	}
-
-	int index = 0;
-	println("Informe o a posicao do dado a ser removido");
-	scanf("%d",&index);
-
-	Conta * conta = (Conta*) getDoubleChainDataAt(chainHead, index);
-	if(conta != NULL){
-		println("'%s' foi removido da fila.", conta->nome);
-		removeFromDoubleChain(chainHead, index);
-
-	}
-	pause();
-}
-
-void addConta(DoubleChainedList* chainHead){
-	Conta *nova = (Conta*) calloc(1, sizeof(Conta));
-
-	nova->nome = (char*) calloc(50, sizeof(char));
-
-	putCursorAt(0, getScreenHeight() - 5);
-	int index = 0;
-	println("Informe o a posicao na lista do dado a ser adicionado: ");
-	scanf("%d",&index);
-
-	printf("Digite o nome (maximo 50 caracteres): ");
-	fgets(nova->nome, 50, stdin);
-
-	//Remove o \n
-	nova->nome[strlen(nova->nome) - 1] = '\0';
-	
-	printf("Digite o numero da conta: ");
-	scanf("%d", &nova->nrContaCorrente);
-
-	addToDoubleChainAt(chainHead, (void *) nova, index);
+	int size = getDoubleChainLength(list);
+	do {
+		printf("number at %d is %d\t|\t", index, (int) getDoubleChainDataAt(list, index));
+		println("number at %d is %d", size - index, (int) getDoubleChainDataAt(list, size - index));	
+		
+	} while (index++ < size);
 }
 
 void userTest(){
-	//First we need to set screen size
-	setScreenSize(50 * 2, 40);
+	int randomSize = getRandomBetweenRange(1, 100);
+	int index;
+	int storedNumber;
+	println("sizeof random list %d", randomSize);
 
+	DoubleChainedList *list = initDoubleChain();
 
-	//We init the chained list
-	if(mainMenuChain == NULL){
-		
-		dcl = initDoubleChain();
-		mainMenuChain = initChain();
+	index = 0;
+	do	{
+		addToDoubleChainEnd(list, (void *) getRandomNumber());
+	} while (index++ < randomSize);
+	
+	printList(list);
+	pause();
+	
+	index = 0;
+	do {
+		storedNumber = (int) getDoubleChainDataAt(list, index);
+		if(!(storedNumber % 2)){
+			removeFromDoubleChain(list, index);
+		}
+	} while (index++ < randomSize);
 
-		//Add the items
-		addToChain(mainMenuChain, (void *) "Adicionar a lista");
-		addToChain(mainMenuChain, (void *) "Excluir da lista");
-		addToChain(mainMenuChain, (void *) "Ver dado");
-		addToChain(mainMenuChain, (void *) "Sair");
-	}
-
-	//Draw the seletable list and wait for the response
-	int selected = drawSelectableList(mainMenuChain, true);
-
-	switch(selected){
-		case 0:
-			addConta(dcl);
-			userTest();
-		break;
-		case 1:
-			removeConta(dcl);
-			userTest();
-		break;
-		case 2:
-			showData(dcl);
-			userTest();
-		break;
-		case 3:
-			//return
-		break;
-	}
-
-
+	printList(list);
+	pause();
+	
 }
 
 
 //TODO escrever os testes
 int main(int argc, char * argv[]) {
 	testString();
+	pause();
 	userTest();
 	return 0;
 }

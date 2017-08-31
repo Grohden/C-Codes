@@ -28,7 +28,7 @@ DoubleChainedList *getDoubleChainAt(DoubleChainedList *chainHead, int chainAt)
 	int len = getDoubleChainLength(chainHead);
 	
 	if( (len/2) <= chainAt){
-		println(" ===== Normal ===== ");
+		//println(" ===== Normal ===== ");
 
 		reference =  (DoubleChainedList *) chainHead->next;
 		index = 0;
@@ -39,7 +39,7 @@ DoubleChainedList *getDoubleChainAt(DoubleChainedList *chainHead, int chainAt)
 			index++;
 		}
 	} else {
-		println(" ===== Reverse ===== ");
+		//println(" ===== Reverse ===== ");
 		reference =  (DoubleChainedList *) chainHead->previous;
 		index = len-1;
 
@@ -179,8 +179,11 @@ void addToDoubleChainEnd(DoubleChainedList *chainHead, void *data)
 
 void addToDoubleChainAt(DoubleChainedList *chainHead, void *data, int index)
 {
-	if(getDoubleChainLength(chainHead)+1 < index){
-		println("Nao e possivel adicionar, index fora dos limites");
+	println("FIXME!!!!! ISNT WORKING");
+	return;
+
+	if(index > getDoubleChainLength(chainHead)){
+		println("Index out of bounds");
 		return;
 	}
 
