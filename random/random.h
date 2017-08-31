@@ -3,6 +3,8 @@
 
 int getRandomNumber();
 
+int getRandomBetweenRange(int max, int min);
+
 int * generateRandomArray(int size);
 
 #endif // !_RANDOM_

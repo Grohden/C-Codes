@@ -1,7 +1,7 @@
 #include <stdbool.h>
 
 #ifndef _CHAINED_LIST_
-#define _CHAINED_LIST_
+#define _CHAINED_LIST_ 1
 
 typedef struct TypeChainedList {
 	void * next;
