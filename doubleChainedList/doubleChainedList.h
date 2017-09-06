@@ -21,6 +21,8 @@ void addToDoubleChainAt(DoubleChainedList *chainHead, void * data, int index);
 
 void removeFromDoubleChain(DoubleChainedList *chainHead, int index);
 
+void removeFromDoubleChainEnd(DoubleChainedList *chainHead);
+
 int getDoubleChainLength(DoubleChainedList *chainHead);
 
 bool isDoubleChainEmpty(DoubleChainedList * chainHead);

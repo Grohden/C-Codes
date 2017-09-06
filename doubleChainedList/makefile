@@ -1,5 +1,5 @@
 CC=gcc ##'C:/Program Files (x86)/Dev-Cpp/MinGW64/bin/gcc.exe'
-GCCFLAGS=-Wall -std=c99
+GCCFLAGS=-Wall -std=c99 -g
 
 ##################### TASKS #####################
 
