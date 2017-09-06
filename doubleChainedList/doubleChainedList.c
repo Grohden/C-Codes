@@ -4,11 +4,9 @@
 #include "../utils.h"
 #include "DoubleChainedList.h"
 
-DoubleChainedList *getDoubleChainAt(DoubleChainedList *chainHead, int chainAt);
 void addToChainStart(DoubleChainedList *chainHead, void *data);
 
-// Private
-DoubleChainedList *getDoubleChainAt(DoubleChainedList *chainHead, int chainAt) {
+static DoubleChainedList *getDoubleChainAt(DoubleChainedList *chainHead, int chainAt) {
   if (isDoubleChainEmpty(chainHead)) {
     println("Lista dupla vazia");
     return NULL;
@@ -24,18 +22,18 @@ DoubleChainedList *getDoubleChainAt(DoubleChainedList *chainHead, int chainAt) {
   int index;
   int len = getDoubleChainLength(chainHead);
 
-  if ((len / 2) <= chainAt) {
-    // println(" ===== Normal ===== ");
+  if ((len / 2) >= chainAt) {
+    // println(" ===== Procura normal ===== ");
 
     reference = (DoubleChainedList *)chainHead->next;
     index = 0;
 
     while (index != chainAt && len > index) {
-      reference = (DoubleChainedList *)reference->next;
+      reference = (DoubleChainedList *) reference->next;
       index++;
     }
   } else {
-    // println(" ===== Reverse ===== ");
+    // println(" ===== Procura Reversa ===== ");
     reference = (DoubleChainedList *)chainHead->previous;
     index = len - 1;
 
@@ -114,7 +112,7 @@ void *getDoubleChainDataAt(DoubleChainedList *chainHead, int elementAt) {
     return NULL;
   }
 
-  return ((DoubleChainedList *)getDoubleChainAt(chainHead, elementAt))->data;
+  return ((DoubleChainedList *) getDoubleChainAt(chainHead, elementAt))->data;
 }
 
 // Adiciona no fim
@@ -195,44 +193,42 @@ void addToDoubleChainAt(DoubleChainedList *chainHead, void *data, int index) {
   }
 }
 
-void removeFromDoubleChain(DoubleChainedList *chainHead, int index) {
+bool removeFromDoubleChain(DoubleChainedList *chainHead, int index) {
   if (isDoubleChainEmpty(chainHead)) {
     println("Nao e possivel remover, lista encadeada vazia");
-    return;
+    return false;
   }
 
-  if (getDoubleChainLength(chainHead) == 1) {
-    free(chainHead->next);
-    chainHead->next = NULL;
-    chainHead->previous = NULL;
+  if (getDoubleChainLength(chainHead) < index) {
+    println("Nao e possivel remover na posicao %d", index);
+    return false;
+  }
+
+  int len = getDoubleChainLength(chainHead);
+
+  if (len + 1 == index) {
+    removeFromDoubleChainEnd(chainHead);
+  } else if(!index){
+    removeFromDoubleChainStart(chainHead);
   } else {
-    DoubleChainedList *chain = getDoubleChainAt(chainHead, index);
-    DoubleChainedList *previous = (DoubleChainedList *)chain->previous;
-    DoubleChainedList *next = (DoubleChainedList *)chain->next;
+    DoubleChainedList *node = (DoubleChainedList *) getDoubleChainAt(chainHead, index);
+    DoubleChainedList *previous = (DoubleChainedList *) node->previous;
+    DoubleChainedList *next = (DoubleChainedList *) node->next;
 
-    // Atualiza as referencias da head
-    if (index == 0) {
-      chainHead->next = ((DoubleChainedList *)chainHead->next)->next;
-    } else if (getDoubleChainLength(chainHead) - 1 == index) {
-      chainHead->previous =
-          ((DoubleChainedList *)chainHead->previous)->previous;
-    }
-
-    next->previous = previous;
     previous->next = next;
-
-    free(chain);
+    next->previous = previous;
+    free(node);
   }
 
-  // de-referenciando ponteiro para inteiro e tirando 1
-  (*(int *)chainHead->data)--;  // Lembrando que guardo o tamanho da lista
-                                // encadeada no primeiro elo
+  (*(int *)chainHead->data)--;
+
+  return true;
 }
 
-void removeFromDoubleChainEnd(DoubleChainedList *chainHead) {
+bool removeFromDoubleChainEnd(DoubleChainedList *chainHead) {
   if (isDoubleChainEmpty(chainHead)) {
     println("Nao e possivel remover, lista encadeada vazia");
-    return;
+    return false;
   }
 
   if (getDoubleChainLength(chainHead) == 1) {
@@ -240,9 +236,9 @@ void removeFromDoubleChainEnd(DoubleChainedList *chainHead) {
     chainHead->next = NULL;
     chainHead->previous = NULL;
   } else {
-    DoubleChainedList *last = (DoubleChainedList *) chainHead->previous;
-    DoubleChainedList *first = (DoubleChainedList *) chainHead->next;
-    DoubleChainedList *newLast = (DoubleChainedList *) last->previous;
+    DoubleChainedList *last = (DoubleChainedList *)chainHead->previous;
+    DoubleChainedList *first = (DoubleChainedList *)chainHead->next;
+    DoubleChainedList *newLast = (DoubleChainedList *)last->previous;
 
     newLast->next = first;
     first->previous = newLast;
@@ -252,6 +248,33 @@ void removeFromDoubleChainEnd(DoubleChainedList *chainHead) {
   }
 
   (*(int *)chainHead->data)--;
+  return true;
+}
+
+bool removeFromDoubleChainStart(DoubleChainedList *chainHead) {
+  if (isDoubleChainEmpty(chainHead)) {
+    println("Nao e possivel remover, lista encadeada vazia");
+    return false;
+  }
+
+  if (getDoubleChainLength(chainHead) == 1) {
+    free(chainHead->next);
+    chainHead->next = NULL;
+    chainHead->previous = NULL;
+  } else {
+    DoubleChainedList *first = (DoubleChainedList *) chainHead->next;
+    DoubleChainedList *last = (DoubleChainedList *) chainHead->previous;
+    DoubleChainedList *newFirst = (DoubleChainedList *) first->previous;
+
+    last->next = newFirst;
+    newFirst->previous = last;
+
+    chainHead->next = newFirst;
+    free(first);
+  }
+
+  (*(int *)chainHead->data)--;
+  return true;
 }
 
 int getDoubleChainLength(DoubleChainedList *chainHead) {

@@ -6,7 +6,7 @@
             "type": "cppdbg",
             "request": "launch",
             "miDebuggerPath":"C:\\MinGW\\bin\\gdb.exe",
-            "preLaunchTask": "debug",
+            "preLaunchTask": "build",
             "program": "${workspaceRoot}/testChain.exe",
             "args": [],
             "stopAtEntry": false,

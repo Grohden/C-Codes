@@ -42,12 +42,12 @@ void testString() {
 
 static void printList(DoubleChainedList *list) {
   int index = 0;
-  int size = getDoubleChainLength(list);
+  int size = getDoubleChainLength(list) - 1;
   do {
     printf("number at %d is %d\t|\t", index,
-           (int)getDoubleChainDataAt(list, index));
+           (int) getDoubleChainDataAt(list, index));
     println("number at %d is %d", size - index,
-            (int)getDoubleChainDataAt(list, size - index));
+            (int) getDoubleChainDataAt(list, size - index));
 
   } while (index++ < size);
 }
@@ -55,11 +55,10 @@ static void printList(DoubleChainedList *list) {
 void userTest() {
   int randomSize = getRandomBetweenRange(1, 100);
   int index;
-  int storedNumber;
+  bool isOdd = false;
   println("sizeof random list %d", randomSize);
 
   DoubleChainedList *list = initDoubleChain();
-
   index = 0;
   do {
     addToDoubleChainEnd(list, (void *) getRandomNumber());
@@ -70,10 +69,14 @@ void userTest() {
 
   index = 0;
   do {
-    storedNumber = (int) getDoubleChainDataAt(list, index);
-    if (!(storedNumber % 2)) {
-      removeFromDoubleChainEnd(list);
+    isOdd = ((int) getDoubleChainDataAt(list, index)) % 2;
+    if (isOdd) {
+      removeFromDoubleChain(list, index);
+      //printf("removed%d\n",index);
+      index--;
+      randomSize--;
     }
+
   } while (index++ < randomSize);
 
   printList(list);

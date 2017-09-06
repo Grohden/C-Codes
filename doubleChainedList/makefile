@@ -6,9 +6,6 @@ GCCFLAGS=-Wall -std=c99 -g
 build: TEST DOUBLE_CHAINED_LIST TEXTUAL_GUI
 	$(CC) $(GCCFLAGS) *.o -o testChain
 
-debug: TEST DOUBLE_CHAINED_LIST TEXTUAL_GUI
-	$(CC) $(GCCFLAGS) -g *.o -o testChain
-
 TEST:
 	$(CC) $(GCCFLAGS) -c testChain.c
 

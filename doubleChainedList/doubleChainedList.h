@@ -15,13 +15,14 @@ DoubleChainedList * initDoubleChain();
 
 void* getDoubleChainDataAt(DoubleChainedList *chainHead, int elementAt);
 
+//Add
 void addToDoubleChainEnd(DoubleChainedList *chainHead, void * data);
-
 void addToDoubleChainAt(DoubleChainedList *chainHead, void * data, int index);
 
-void removeFromDoubleChain(DoubleChainedList *chainHead, int index);
-
-void removeFromDoubleChainEnd(DoubleChainedList *chainHead);
+//Remove
+bool removeFromDoubleChain(DoubleChainedList *chainHead, int index);
+bool removeFromDoubleChainEnd(DoubleChainedList *chainHead);
+bool removeFromDoubleChainStart(DoubleChainedList *chainHead);
 
 int getDoubleChainLength(DoubleChainedList *chainHead);
 

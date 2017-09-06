@@ -9,12 +9,6 @@
   "tasks": [
     {
       "isBuildCommand": true,
-      "taskName": "debug",
-      "args": [
-        "debug"
-      ]
-    },
-    {
       "taskName": "build",
       "args": [
         "build"
