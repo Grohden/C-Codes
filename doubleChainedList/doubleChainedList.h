@@ -29,7 +29,7 @@ bool addToDoublyChainEnd(DoublyChainedListHead *chainHead, int *data);
 //bool addToDoublyChainAt(DoublyChainedListHead *chainHead, int *data, int index);
 
 //Remove
-//bool removeFromDoublyChain(DoublyChainedListHead *chainHead, int index);
+bool removeFromDoublyChain(DoublyChainedListHead *chainHead, int index);
 bool removeFromDoublyChainEnd(DoublyChainedListHead *chainHead);
 bool removeFromDoublyChainStart(DoublyChainedListHead *chainHead);
 

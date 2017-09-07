@@ -135,7 +135,6 @@ bool addToDoublyChainEnd(DoublyChainedListHead *head, int *data)
     newLast->next = newLast;
     head->start = newLast;
     head->end = newLast;
-    newLast;
   }
   else if (getDoublyChainLength(head) == 1)
   {
@@ -217,15 +216,15 @@ bool removeFromDoublyChain(DoublyChainedListHead *head, int index)
     return false;
   }
 
-  int len = getDoublyChainLength(head);
+  int len = getDoublyChainLength(head) - 1;
 
-  if (len + 1 == index)
+  if (len == index)
   {
-    removeFromDoublyChainEnd(head);
+    return removeFromDoublyChainEnd(head);
   }
   else if (!index)
   {
-    removeFromDoublyChainStart(head);
+    return removeFromDoublyChainStart(head);
   }
   else
   {
@@ -235,7 +234,9 @@ bool removeFromDoublyChain(DoublyChainedListHead *head, int index)
 
     previous->next = next;
     next->previous = previous;
-    //free(node);
+    
+    free(node);
+    
     head->length--;
   }
 
