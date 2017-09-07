@@ -1,30 +1,39 @@
 #include <stdbool.h>
 
-#ifndef _DOUBLE_CHAINED_LIST_
-#define _DOUBLE_CHAINED_LIST_
+#ifndef _DOUBLY_CHAINED_LIST_
+#define _DOUBLY_CHAINED_LIST_
 
+typedef struct DoublyChainedListHead DoublyChainedListHead;
+typedef struct DoublyChain DoublyChain;
 
-typedef struct TypeDoubleChainedList {
-	void * previous;
-	void * next;
-	void * data;
-} DoubleChainedList;
+struct DoublyChain {
+	DoublyChain * previous;
+	DoublyChain * next;
+	int *data;
+};
 
+struct DoublyChainedListHead {
+	DoublyChain *start;
+	DoublyChain *end;
+	int length;
+};
 
-DoubleChainedList * initDoubleChain();
+DoublyChainedListHead * initDoublyChain();
 
-void* getDoubleChainDataAt(DoubleChainedList *chainHead, int elementAt);
+//Get
+int* getDoublyChainDataAt(DoublyChainedListHead *chainHead, int elementAt);
 
 //Add
-void addToDoubleChainEnd(DoubleChainedList *chainHead, void * data);
-void addToDoubleChainAt(DoubleChainedList *chainHead, void * data, int index);
+bool addToDoublyChainStart(DoublyChainedListHead *chainHead, int *data);
+bool addToDoublyChainEnd(DoublyChainedListHead *chainHead, int *data);
+bool addToDoublyChainAt(DoublyChainedListHead *chainHead, int *data, int index);
 
 //Remove
-bool removeFromDoubleChain(DoubleChainedList *chainHead, int index);
-bool removeFromDoubleChainEnd(DoubleChainedList *chainHead);
-bool removeFromDoubleChainStart(DoubleChainedList *chainHead);
+bool removeFromDoublyChain(DoublyChainedListHead *chainHead, int index);
+bool removeFromDoublyChainEnd(DoublyChainedListHead *chainHead);
+bool removeFromDoublyChainStart(DoublyChainedListHead *chainHead);
 
-int getDoubleChainLength(DoubleChainedList *chainHead);
-
-bool isDoubleChainEmpty(DoubleChainedList * chainHead);
-#endif // !_DOUBLE_CHAINED_LIST_
+//Infos
+int getDoublyChainLength(DoublyChainedListHead *chainHead);
+bool isDoublyChainEmpty(DoublyChainedListHead * chainHead);
+#endif // !_DOUBLY_CHAINED_LIST_

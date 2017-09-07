@@ -10,6 +10,8 @@
 
 #define println(...) printf(__VA_ARGS__); printf("\n");
 
+#define PAUSE() system("pause")
+
 //Debug messages
 #define _USE_DEBUG 1
 #if _USE_DEBUG
