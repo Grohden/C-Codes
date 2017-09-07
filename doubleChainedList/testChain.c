@@ -11,7 +11,7 @@
 static void printList(DoublyChainedListHead *list)
 {
   int index = 0;
-  int size = getDoublyChainLength(list) - 1;
+  int size = getDoublyChainLength(list);
   if (!size)
   {
     println("Empty list");
@@ -21,12 +21,12 @@ static void printList(DoublyChainedListHead *list)
     do
     {
       printf("number at %d is %d\t|\t", index,
-             (int) getDoublyChainDataAt(list, index));
-     
-             println("number at %d is %d", size - index,
-              (int) getDoublyChainAt(list, size - index));
+             (int)getDoublyChainDataAt(list, index));
 
-    } while (index++ < size);
+      println("number at %d is %d", size - index,
+              (int)getDoublyChainDataAt(list, size - index));
+
+    } while (++index < size);
   }
 
   println("===========================================");
@@ -44,24 +44,22 @@ void userTest()
   do
   {
     //addToDoubleChainEnd(list, (void *) getRandomBetweenRange(1,100));
-    addToDoubleChainEnd(list, 10);
+    addToDoublyChainEnd(list, 10);
   } while (++index < randomSize);
 
   printList(list);
-
+  
   index = 0;
   do
   {
-    isEven = ((int) getDoublyChainDataAt(list, index)) % 2 == 0;
+    //isEven = ((int)getDoublyChainDataAt(list, index)) % 2 == 0;
+    removeFromDoublyChainEnd(list);
+    
+    //if (isEven)
+    //{
+    //}
 
-    if (isEven)
-    {
-      removeFromDoublyChainEnd(list);
-      index--;
-      randomSize--;
-    }
-
-  } while (index++ < randomSize);
+  } while (++index < randomSize);
 
   printList(list);
 }

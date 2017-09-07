@@ -97,6 +97,7 @@ bool addToDoublyChainStart(DoublyChainedListHead *head, int *data)
   }
 
   head->length++;
+  return true;
 }
 
 // Public
@@ -123,7 +124,7 @@ bool addToDoublyChainEnd(DoublyChainedListHead *head, int *data)
 {
   DoublyChain *newLast = initDoublyNode();
   DoublyChain *end = head->end;
-  
+
   // Seta o dado
   newLast->data = data;
 
@@ -138,16 +139,16 @@ bool addToDoublyChainEnd(DoublyChainedListHead *head, int *data)
   }
   else if (getDoublyChainLength(head) == 1)
   {
-    newLast->next = oldLast;
-    newLast->previous = oldLast;
+    newLast->next = head->end;
+    newLast->previous = head->end;
 
-    oldLast->next = newLast;
-    oldLast->previous = newLast;
+    head->end->next = newLast;
+    head->end->previous = newLast;
   }
   else
   {
     DoublyChain *start = head->start;
-    
+
     //New references
     newLast->next = start;
     newLast->previous = end;
@@ -158,33 +159,30 @@ bool addToDoublyChainEnd(DoublyChainedListHead *head, int *data)
 
     //Head references
     head->end = newLast;
-    
   }
 
   head->length++;
-  return;
+  return true;
 }
 
 bool addToDoublyChainAt(DoublyChainedListHead *head, int *data, int index)
 {
   println("FIXME!!!!! ISNT WORKING");
-  return;
+  return false;
 
   if (index > getDoublyChainLength(head))
   {
     println("Index out of bounds");
-    return;
+    return false;
   }
 
   if (index == 0)
   {
-    addToDoublyChainStart(head, data);
-    return;
+    return addToDoublyChainStart(head, data);
   }
   else if (getDoublyChainLength(head) == index + 1)
   {
-    addToDoublyChainEnd(head, data);
-    return;
+    return addToDoublyChainEnd(head, data);
   }
   else
   {
@@ -201,6 +199,8 @@ bool addToDoublyChainAt(DoublyChainedListHead *head, int *data, int index)
     old->previous = newChain;
     head->length++;
   }
+
+  return true;
 }
 
 bool removeFromDoublyChain(DoublyChainedListHead *head, int index)
@@ -311,5 +311,5 @@ int getDoublyChainLength(DoublyChainedListHead *head)
 
 bool isDoublyChainEmpty(DoublyChainedListHead *head)
 {
-  return head->length < 0;
+  return head->length <= 0;
 }
