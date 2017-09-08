@@ -176,14 +176,12 @@ bool removeFromDoublyChain(DoublyChainedListHead *head, int index) {
     return false;
   }
 
-  if (getDoublyChainLength(head) < index) {
+  if (getDoublyChainLength(head) <= index) {
     println("Nao e possivel remover na posicao %d", index);
     return false;
   }
 
-  int len = getDoublyChainLength(head) - 1;
-
-  if (len == index) {
+  if (getDoublyChainLength(head) - 1 == index) {
     return removeFromDoublyChainEnd(head);
   } else if (!index) {
     return removeFromDoublyChainStart(head);
@@ -248,7 +246,9 @@ bool removeFromDoublyChainStart(DoublyChainedListHead *head) {
     tailNode->next = headNode;
     headNode->previous = tailNode;
 
-    // free(removedNode);
+    head->start = headNode;
+    head->end = tailNode;
+    free(removedNode);
   }
 
   head->length--;

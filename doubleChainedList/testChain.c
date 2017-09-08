@@ -18,6 +18,7 @@ static void printList(DoublyChainedListHead *head)
   }
   else
   {
+    println("list length %d", getDoublyChainLength(head));
     for (index = 0; index < getDoublyChainLength(head); index++) {
       println("number at %d is %d", index,
               (int) getDoublyChainDataAt(head, index));
@@ -29,52 +30,26 @@ static void printList(DoublyChainedListHead *head)
 
 void userTest()
 {
-  int randomSize = 5; //getRandomBetweenRange(1, 20) - 1;
+  int randomSize = getRandomBetweenRange(1, 20);
   int index;
   bool isEven = false;
 
   DoublyChainedListHead *list = initDoublyChain();
-  index = 0;
-  int d;  
-  /*do
-  {
-    d = getRandomBetweenRange(1,100);
-    println("%d",d);    
-    addToDoublyChainEnd(list, (int *) d);
-    //addToDoublyChainEnd(list, 11);
-  } while (++index < randomSize);
-  */
 
-  addToDoublyChainEnd(list, 10);
-  addToDoublyChainEnd(list, 17);
-  addToDoublyChainEnd(list, 14);
-  addToDoublyChainEnd(list, 13);
-  addToDoublyChainEnd(list, 11);
-  
-  println("list length %d", getDoublyChainLength(list));
+  for (index = 0; index++ < randomSize; index++) {
+    addToDoublyChainEnd(list, (int *) getRandomBetweenRange(1,5));
+  }
   printList(list);
-  
-  index = 0;
-  d = (int) getDoublyChainDataAt(list, index);
-  isEven = (d) % 2 == 0;
-  println("%d %s",d, isEven ? "iseven":"isodd"); 
 
-  removeFromDoublyChain(list, 0);
+  for (index = 0; index < getDoublyChainLength(list); index++) {
+    isEven = ((int)getDoublyChainDataAt(list, index)) % 2 == 0;
 
-  printList(list);
-  return;
-
-  do
-  {
-
-    if (isEven)
-    {
-      //removeFromDoublyChain(list, index);
-      //index--;      
+    if (isEven) {
+      removeFromDoublyChain(list, index);
+      index--;
     }
-
-  } while (++index < getDoublyChainLength(list));
-
+  }
+  printList(list);
 }
 
 int main(int argc, char *argv[])
