@@ -124,8 +124,6 @@ bool addToDoublyChainEnd(DoublyChainedListHead *head, int *data) {
       head->start->previous = newLast;
       head->end = newLast;
     } else {
-      DoublyChain *start = head->start;
-
       // Previous and next nodes references to the new
       head->start->previous = newLast;
       head->end->next = newLast;

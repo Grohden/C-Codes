@@ -11,33 +11,36 @@
 static void printList(DoublyChainedListHead *head)
 {
   int index = 0;
-  int size = getDoublyChainLength(head);
-  if (isDoublyChainEmpty(head))
-  {
+  int length = getDoublyChainLength(head);
+  if (isDoublyChainEmpty(head)) {
     println("Empty list");
   }
   else
   {
-    println("list length %d", getDoublyChainLength(head));
-    for (index = 0; index < getDoublyChainLength(head); index++) {
-      println("number at %d is %d", index,
-              (int) getDoublyChainDataAt(head, index));
+    println("list length %d", length);
+    for (index = 0; index < length; index++) {
+      printf("number at %d is %d \t|\t", index,
+              (int) getDoublyChainDataAt(head, index)
+      );
+      println("number at %d is %d", (length - 1) - index,
+              (int) getDoublyChainDataAt(head, (length - 1) - index)
+      );
     }
   }
 
-  println("===========================================");
+  println("===============================================");
 }
 
 void userTest()
 {
-  int randomSize = getRandomBetweenRange(1, 20);
+  int randomSize = getRandomBetweenRange(10, 100);
   int index;
   bool isEven = false;
 
   DoublyChainedListHead *list = initDoublyChain();
 
   for (index = 0; index++ < randomSize; index++) {
-    addToDoublyChainEnd(list, (int *) getRandomBetweenRange(1,5));
+    addToDoublyChainEnd(list, (int *) getRandomBetweenRange(1,100));
   }
   printList(list);
 

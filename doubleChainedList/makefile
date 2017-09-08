@@ -3,7 +3,7 @@ GCCFLAGS=-Wall -g
 
 ##################### TASKS #####################
 
-build: TEST DOUBLE_CHAINED_LIST UTILS
+build: DOUBLE_CHAINED_LIST UTILS TEST
 	$(CC) $(GCCFLAGS) *.o -o testChain
 
 TEST:
