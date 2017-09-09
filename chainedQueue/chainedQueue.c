@@ -1,90 +1,75 @@
+#include "chainedQueue.h"
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include "../utils.h"
 #include "../messageUtils.h"
-#include "chainedQueue.h"
+#include "../utils.h"
 
-//Private
+// Private
 
-ChainQueueHead * initChainQueue()
-{
-	ChainQueueHead *head = (ChainQueueHead *) calloc(1, sizeof(ChainQueueHead));
+ChainQueueHead *initChainQueue() {
+  ChainQueueHead *head = (ChainQueueHead *)calloc(1, sizeof(ChainQueueHead));
 
-	head->first = NULL;
-	head->last = NULL;
-	head->length = 0;
+  head->first = NULL;
+  head->last = NULL;
+  head->length = 0;
 
-	return head;
+  return head;
 }
 
-
-//Public
-void * getChainQueueFirstData(ChainQueueHead *chainHead)
-{
-
-	if (isChainQueueEmpty(chainHead))
-	{
-		println("Nao e possivel pegar o item, lista vazia");
-		return NULL;
-	}
-
-	return (chainHead->first)->data;
+static ChainQueue *initChainQueueNode() {
+  ChainQueue *chainQueue = (ChainQueue *) calloc(1, sizeof(ChainQueue));
+  return chainQueue;
 }
 
-void addToChainQueue(ChainQueueHead *chainHead, void * data)
-{
-	ChainQueue *oldLast = chainHead->last;
+// Public
+int* getChainQueueFirstData(ChainQueueHead *chainHead) {
+  if (isChainQueueEmpty(chainHead)) {
+    println("Nao e possivel pegar o item, lista vazia");
+    return NULL;
+  }
 
-	//Novo nó
-	ChainQueue *newLast = (ChainQueue *) calloc(1, sizeof(ChainQueue));
-	
-	//Dado
-	newLast->data = data;
-	
-	if(getChainQueueLength(chainHead) == 0){
-		chainHead->first = newLast;
-	} else {
-		//Coloco na chain
-		oldLast->next =  newLast;
-	}
-
-	//Head
-	chainHead->last = newLast;
-
-	chainHead->length++;
+  return (chainHead->first)->data;
 }
 
-bool removeFromChainQueue(ChainQueueHead *chainHead)
-{
-	if (isChainQueueEmpty(chainHead))
-	{
-		println("Nao e possivel remover, fila encadeada vazia");
-		return false;
-	}
+void addToChainQueue(ChainQueueHead *chainHead, int *data) {
+  ChainQueue *oldLast = chainHead->last;
 
-	ChainQueue *first = chainHead->first;
-	if(getChainQueueLength(chainHead) > 1){
-		ChainQueue *newFirst = first->next;
-		chainHead->first = newFirst;
-	}
+  ChainQueue *newLast = initChainQueueNode();
+  newLast->data = data;
 
-	free(first);
-	chainHead->length--;
-	return true;
+  if (isChainQueueEmpty(chainHead)) {
+    chainHead->first = newLast;
+  } else {
+    // Coloco na chain
+    oldLast->next = newLast;
+  }
+
+  // Head
+  chainHead->last = newLast;
+
+  chainHead->length++;
 }
 
-int getChainQueueLength(ChainQueueHead *chainHead)
-{
-	if (isChainQueueEmpty(chainHead))
-	{
-		return 0;
-	}
+bool removeFromChainQueue(ChainQueueHead *chainHead) {
+  if (isChainQueueEmpty(chainHead)) {
+    println("Nao e possivel remover, fila encadeada vazia");
+    return false;
+  }
 
-	return chainHead->length;
+  ChainQueue *first = chainHead->first;
+  if (getChainQueueLength(chainHead) > 1) {
+    ChainQueue *newFirst = first->next;
+    chainHead->first = newFirst;
+  }
+
+  free(first);
+  chainHead->length--;
+  return true;
 }
 
-bool isChainQueueEmpty(ChainQueueHead * chainHead)
-{
-	return !chainHead->length;
+int getChainQueueLength(ChainQueueHead *chainHead) {
+  return chainHead->length;
 }
+
+bool isChainQueueEmpty(ChainQueueHead *chainHead) { return !chainHead->length; }

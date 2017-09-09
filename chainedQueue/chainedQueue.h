@@ -3,26 +3,29 @@
 #ifndef _CHAINED_QUEUE_
 #define _CHAINED_QUEUE_
 
-
-typedef struct ChainQueue {
-	ChainQueue * next;
-	void * data;
-} ChainQueue;
+#define CQ_DATA int*
 
 
-typedef struct ChainQueueHead {
-	ChainQueue * last;
-	ChainQueue * first;
-	int length;
-} ChainStackHead;
+typedef struct ChainQueueHead ChainQueueHead;
+typedef struct ChainQueue ChainQueue;
 
+struct ChainQueue {
+  ChainQueue *next;
+  CQ_DATA data;
+};
+
+struct ChainQueueHead {
+  ChainQueue *last;
+  ChainQueue *first;
+  int length;
+};
 
 
 ChainQueueHead * initChainQueue();
 
-void * getChainQueueFirstData(ChainQueueHead *chainHead);
+int* getChainQueueFirstData(ChainQueueHead *chainHead);
 
-void addToChainQueue(ChainQueueHead *chainHead, void * data);
+void addToChainQueue(ChainQueueHead *chainHead, int* data);
 
 bool removeFromChainQueue(ChainQueueHead *chainHead);
 
