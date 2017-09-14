@@ -22,8 +22,7 @@ static ChainQueue *initChainQueueNode() {
   return chainQueue;
 }
 
-// Public
-int* getChainQueueFirstData(ChainQueueHead *chainHead) {
+CHAIN_QUEUE_DATA getChainQueueFirstData(ChainQueueHead *chainHead) {
   if (isChainQueueEmpty(chainHead)) {
     println("Nao e possivel pegar o item, lista vazia");
     return NULL;
@@ -32,7 +31,7 @@ int* getChainQueueFirstData(ChainQueueHead *chainHead) {
   return (chainHead->first)->data;
 }
 
-void addToChainQueue(ChainQueueHead *chainHead, int *data) {
+void addToChainQueue(ChainQueueHead *chainHead, CHAIN_QUEUE_DATA data) {
   ChainQueue *oldLast = chainHead->last;
 
   ChainQueue *newLast = initChainQueueNode();
@@ -51,10 +50,10 @@ void addToChainQueue(ChainQueueHead *chainHead, int *data) {
   chainHead->length++;
 }
 
-bool removeFromChainQueue(ChainQueueHead *chainHead) {
+CHAIN_QUEUE_DATA removeFromChainQueue(ChainQueueHead *chainHead) {
   if (isChainQueueEmpty(chainHead)) {
     println("Nao e possivel remover, fila encadeada vazia");
-    return false;
+    return NULL;
   }
 
   ChainQueue *first = chainHead->first;
@@ -63,9 +62,10 @@ bool removeFromChainQueue(ChainQueueHead *chainHead) {
     chainHead->first = newFirst;
   }
 
+  CHAIN_QUEUE_DATA data = first->data;
   free(first);
   chainHead->length--;
-  return true;
+  return data;
 }
 
 int getChainQueueLength(ChainQueueHead *chainHead) {
