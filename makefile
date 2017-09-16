@@ -3,7 +3,9 @@ GCCFLAGS=-Wall -g
 
 ##################### DATA STRUCTS #####################
 
-dataStructsBasePath = .
+dataStructsBasePath = ./dataStructs
+
+DATA_STRUCTS: CHAINED_LIST CHAINED_QUEUE STACK DOUBLE_CHAINED_LIST TREE DOUBLE_STACK DOUBLE_ENDED_QUEUE QUEUE
 
 CHAINED_LIST:
 	$(CC) -c $(dataStructsBasePath)/chainedList/chainedList.c
@@ -29,7 +31,10 @@ DOUBLE_ENDED_QUEUE:
 QUEUE:
 	$(CC) $(GCCFLAGS) -c $(dataStructsBasePath)/queue/queue.c
 
+################## SORT FUNCTIONS ######################
+
+######################### LIBS #########################
+
 RANDOM:
 	$(CC) $(GCCFLAGS) -c $(dataStructsBasePath)/random/random.c
 
-################## SORT FUNCTIONS ######################
