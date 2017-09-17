@@ -1,6 +1,9 @@
 CC=gcc ##'C:/Program Files (x86)/Dev-Cpp/MinGW64/bin/gcc.exe'
 GCCFLAGS=-Wall -g
 
+
+BUILD_ALL: DATA_STRUCTS SORT_FUNCTIONS LIBS
+
 ##################### DATA STRUCTS #####################
 
 dataStructsBasePath = ./dataStructs
@@ -33,8 +36,37 @@ QUEUE:
 
 ################## SORT FUNCTIONS ######################
 
+sortsBasePath = ./sortFunctions
+
+SORT_FUNCTIONS: INSERTION_SORT QUICK_SORT MERGE_SORT SELECTION_SORT BUBBLE_SORT
+
+INSERTION_SORT:SORT_UTILS
+	$(CC) $(GCCFLAGS) -c $(sortsBasePath)/insertionSort/insertionSort.c
+
+MERGE_SORT:SORT_UTILS
+	$(CC) $(GCCFLAGS) -c $(sortsBasePath)/mergeSort/mergeSort.c
+
+QUICK_SORT:SORT_UTILS
+	$(CC) $(GCCFLAGS) -c $(sortsBasePath)/quickSort/quickSort.c
+
+SELECTION_SORT:SORT_UTILS
+	$(CC) $(GCCFLAGS) -c $(sortsBasePath)/selectionSort/selectionSort.c
+
+BUBBLE_SORT:SORT_UTILS
+	$(CC) $(GCCFLAGS) -c $(sortsBasePath)/bubbleSort/bubbleSort.c
+
+SORT_UTILS:
+	$(CC) $(GCCFLAGS) -c $(sortsBasePath)/sortUtils.c
+
+
+
+
 ######################### LIBS #########################
 
+libsBasePath = ./libs
+
+LIBS: RANDOM
+
 RANDOM:
-	$(CC) $(GCCFLAGS) -c $(dataStructsBasePath)/random/random.c
+	$(CC) $(GCCFLAGS) -c $(libsBasePath)/random/random.c
 

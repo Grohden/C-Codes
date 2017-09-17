@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
-#include "../utils.h"
 #include "../sortUtils.h"
 #include "mergeSort.h"
 

@@ -1,37 +1,36 @@
+#include "insertionSort.h"
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include "../utils.h"
 #include "../sortUtils.h"
-#include "insertionSort.h"
 
-SortData* insertionSortIntArray(int array[], int size){
-	SortData *sortData = initSortData();
+SortData* insertionSortIntArray(int array[], int size) {
+  SortData* sortData = initSortData();
 
-	if(size <= 1){
-		return sortData;
-	}
+  if (size <= 1) {
+    return sortData;
+  }
 
-	int i = 0;
-	int j = 0;
-	
-	while(i < size - 1){
-		j = i;
+  int i = 0;
+  int j = 0;
 
-		while(j >= 0){
-			(sortData->comparisons)++;
-			if(array[j] > array[j + 1]){
-				swapVariables(&array[j],&array[j+1]);
-				(sortData->swaps)++;
-			} else {
-				break;
-			}
-			
-			j--;
-		}
+  while (i < size - 1) {
+    j = i;
 
-		i++;
-	}
+    while (j >= 0) {
+      (sortData->comparisons)++;
+      if (array[j] > array[j + 1]) {
+        swapVariables(&array[j], &array[j + 1]);
+        (sortData->swaps)++;
+      } else {
+        break;
+      }
 
-	return sortData;
+      j--;
+    }
+
+    i++;
+  }
+
+  return sortData;
 }

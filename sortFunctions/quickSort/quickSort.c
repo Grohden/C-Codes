@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../utils.h"
 #include "../sortUtils.h"
 #include "quickSort.h"
 
