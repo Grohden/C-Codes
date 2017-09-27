@@ -37,5 +37,5 @@ bool setAtArray(Array *array, ARRAY_DATA data, int index) {
 int getArrayLenght(Array *array) { return array->length; };
 
 bool isArrayFull(Array *array) {
-  return getArrayLenght(array) = > array->size - 1;
+  return getArrayLenght(array) >= array->size - 1;
 }
