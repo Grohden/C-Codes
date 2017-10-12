@@ -4,6 +4,6 @@
 #ifndef _QUICK_SORT_
 #define _QUICK_SORT_
 
-SortData* quickSortIntArray(int array[], int size);
+SortData *quickSortIntArray(void **array, int size, int ((*predicate)(void *, void *)));
 
 #endif // !_QUICK_SORT_

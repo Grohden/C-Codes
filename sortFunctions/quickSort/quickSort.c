@@ -1,75 +1,67 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include "../sortUtils.h"
 #include "quickSort.h"
 
-int partition(int array[], int size, int pivot, SortData *sortDataStruct)
-{
-	if (size <= 1)
-	{
-		return 0;
-	}
+int partition(void **array, int size, int pivot, SortData *sortDataStruct, int ((*predicate)(void *, void *))) {
+    if (size <= 1) {
+        return 0;
+    }
 
-	int pivotValue = array[pivot];
-	int start = 0;
-	int end = size - 1;
+    void *pivotValue = array[pivot];
+    int start = 0;
+    int end = size - 1;
 
-	while (start <= end)
-	{
+    while (start <= end) {
 
-		while (array[start] <= pivotValue && start <= end)
-		{
-			sortDataStruct->comparisons++;
-			start++;
-		}
+        while (predicate(pivotValue, array[start]) && start <= end) {
+            sortDataStruct->comparisons++;
+            start++;
+        }
 
-		while (array[end] > pivotValue && start <= end)
-		{
-			sortDataStruct->comparisons++;
-			end--;
-		}
+        while (predicate(array[end], pivotValue) && start <= end) {
+            sortDataStruct->comparisons++;
+            end--;
+        }
 
-		if (start <= end)
-		{
-			swapVariables(&array[start], &array[end]);
-			sortDataStruct->swaps++;
+        if (start <= end) {
+            swapVariables((int *) &array[start], (int *) &array[end]);
+            sortDataStruct->swaps++;
 
-			start++;
-			end--;
-		}
-	}
+            start++;
+            end--;
+        }
+    }
 
-	swapVariables(&array[pivot], &array[end]);
-	sortDataStruct->swaps++;
-			
-	return end;
+    swapVariables((int *) &array[pivot], (int *) &array[end]);
+    sortDataStruct->swaps++;
+
+    return end;
 }
 
-void delegatedQuickSort(int array[], int size, SortData *sortDataStruct){
-	if (size <= 1)	{
-		return;
-	}
+void delegatedQuickSort(void **array, int size, SortData *sortDataStruct, int ((*predicate)(void *, void *))) {
+    if (size <= 1) {
+        return;
+    }
 
-	int start = 0;
-	int end = size - 1;
+    int start = 0;
+    int end = size - 1;
 
-	if (start < end)
-	{
-		start = partition(array, size, 0, sortDataStruct);
-		
-		delegatedQuickSort(array, start, sortDataStruct);
-		delegatedQuickSort(&array[start + 1], size - (start + 1), sortDataStruct);
-	}
+    if (start < end) {
+        start = partition(array, size, 0, sortDataStruct, predicate);
+
+        delegatedQuickSort(array, start, sortDataStruct, predicate);
+        delegatedQuickSort(&array[start + 1], size - (start + 1), sortDataStruct, predicate);
+    }
 }
 
 
-SortData* quickSortIntArray(int array[], int size){
-	SortData *sortData = (SortData *) calloc(sizeof(SortData),1);
-	sortData->comparisons = 0;
-	sortData->swaps = 0;
+SortData *quickSortIntArray(void **array, int size, int ((*predicate)(void *, void *))) {
+    SortData *sortData = (SortData *) calloc(sizeof(SortData), 1);
+    sortData->comparisons = 0;
+    sortData->swaps = 0;
 
-	delegatedQuickSort(array, size, sortData);
+    delegatedQuickSort(array, size, sortData, predicate);
 
-	return sortData;
+    return sortData;
 }

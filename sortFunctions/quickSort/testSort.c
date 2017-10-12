@@ -1,33 +1,29 @@
 #include "quickSort.h"
-#include "../utils.h"
-#include "../sortUtils.h"
-#include "../SO/specifics.h" //pause
-#include "../random/random.h"
-#include <stdbool.h>
-#include <stdio.h>
-#include <math.h>
-#include <string.h>
-#include <stdlib.h>
+#include "../../utils/utils.h"
+#include "../../libs/random/random.h"
+
+int comparer(void *t, void *f) {
+    int x = (int) f;
+    int y = (int) t;
+    return y < x;
+}
 
 //TODO escrever os testes
 int main(int argc, char * argv[]) {
 
 	int len = 10;
 	int i = 0;
-	int swapCount;
-	int * array;
+    void **array;
 
 	while(i++ < len){
 
-		array = generateRandomArray(len);
+        array = (void **) generateRandomArray(len);
 
-		SortData *data = quickSortIntArray(array, len);
+        SortData *data = quickSortIntArray(array, len, &comparer);
 		println("quickSort: Swaps %d, Comparisons: %d", data->swaps, data->comparisons);
 
-		printIntArray(array,len);
+        printIntArray((int *) array, len);
 	}
-
-	pause();
 
 	return 0;
 }
