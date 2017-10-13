@@ -1,11 +1,10 @@
 #include "quickSort.h"
-#include "../../utils/utils.h"
 #include "../../libs/random/random.h"
 
 int comparer(void *t, void *f) {
     int x = (int) f;
     int y = (int) t;
-    return y < x;
+    return y >= x;
 }
 
 //TODO escrever os testes
@@ -19,9 +18,7 @@ int main(int argc, char * argv[]) {
 
         array = (void **) generateRandomArray(len);
 
-        SortData *data = quickSortIntArray(array, len, &comparer);
-		println("quickSort: Swaps %d, Comparisons: %d", data->swaps, data->comparisons);
-
+        quickSortIntArray(array, len, &comparer);
         printIntArray((int *) array, len);
 	}
 

@@ -3,7 +3,7 @@
 #include "../sortUtils.h"
 #include "quickSort.h"
 
-int partition(void **array, int size, int pivot, SortData *sortDataStruct, int ((*predicate)(void *, void *))) {
+int partition(void **array, int size, int pivot, int ((*predicate)(void *, void *))) {
     if (size <= 1) {
         return 0;
     }
@@ -15,18 +15,15 @@ int partition(void **array, int size, int pivot, SortData *sortDataStruct, int (
     while (start <= end) {
 
         while (predicate(pivotValue, array[start]) && start <= end) {
-            sortDataStruct->comparisons++;
             start++;
         }
 
         while (predicate(array[end], pivotValue) && start <= end) {
-            sortDataStruct->comparisons++;
             end--;
         }
 
         if (start <= end) {
             swapVariables((int *) &array[start], (int *) &array[end]);
-            sortDataStruct->swaps++;
 
             start++;
             end--;
@@ -34,12 +31,11 @@ int partition(void **array, int size, int pivot, SortData *sortDataStruct, int (
     }
 
     swapVariables((int *) &array[pivot], (int *) &array[end]);
-    sortDataStruct->swaps++;
 
     return end;
 }
 
-void delegatedQuickSort(void **array, int size, SortData *sortDataStruct, int ((*predicate)(void *, void *))) {
+void delegatedQuickSort(void **array, int size, int ((*predicate)(void *, void *))) {
     if (size <= 1) {
         return;
     }
@@ -48,20 +44,18 @@ void delegatedQuickSort(void **array, int size, SortData *sortDataStruct, int ((
     int end = size - 1;
 
     if (start < end) {
-        start = partition(array, size, 0, sortDataStruct, predicate);
+        start = partition(array, size, 0, predicate);
 
-        delegatedQuickSort(array, start, sortDataStruct, predicate);
-        delegatedQuickSort(&array[start + 1], size - (start + 1), sortDataStruct, predicate);
+        delegatedQuickSort(array, start, predicate);
+        delegatedQuickSort(&array[start + 1], size - (start + 1), predicate);
     }
 }
 
 
-SortData *quickSortIntArray(void **array, int size, int ((*predicate)(void *, void *))) {
+void quickSortIntArray(void **array, int size, int ((*predicate)(void *, void *))) {
     SortData *sortData = (SortData *) calloc(sizeof(SortData), 1);
     sortData->comparisons = 0;
     sortData->swaps = 0;
 
-    delegatedQuickSort(array, size, sortData, predicate);
-
-    return sortData;
+    delegatedQuickSort(array, size, predicate);
 }
